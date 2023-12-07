@@ -1,0 +1,37 @@
+<app-new-drop-down (mouseenter)="GetUserItems()" [disabled]="disableuserchange" [items]="useritems" (itemselected)="SetUser($event)" [emptyoption]="false" ></app-new-drop-down>
+<div *ngIf="selecteduser != ''">
+    <p>Name:</p>
+    <input [disabled]="DisableAccess()" (input)="PageChanged()" [(ngModel)]="selecteduserObj.name" type="text">
+    <p>Surname:</p>
+    <input [disabled]="DisableAccess()" (input)="PageChanged()" [(ngModel)]="selecteduserObj.surname" type="text">
+    <p>Contact Number:</p>
+    <input [disabled]="DisableAccess()" (input)="PageChanged()" [(ngModel)]="selecteduserObj.contact" type="text">
+    <form #myform="ngForm">
+        <p>Email:</p>
+        <input [disabled]="selecteduser != 'New User'" (input)="PageChanged()" [(ngModel)]="selecteduserObj.email" type="email" name="email" email>
+    </form>
+    <div *ngIf="userdata.superuser" class="myrow">
+        <input [disabled]="DisableAccess()" (input)="PageChanged()" [(ngModel)]="selecteduserObj.admin" type="checkbox">
+        <p>Admin</p>
+    </div>
+    <div *ngIf="userdata.superuser" class="myrow">
+        <input [disabled]="DisableAccess()" (input)="PageChanged()" [(ngModel)]="selecteduserObj.developer" type="checkbox">
+        <p>Developer</p>
+    </div>
+    <p>Assigned Projects:</p>
+    <p *ngIf="showprojectwarning" style="color:red;">Select Atleast One Of The Projects Below!</p>
+    <div class="medium-container">
+        <div *ngFor="let cust of customers; let i = index" class="myrow">
+            <input [disabled]="DisableAccess()" (input)="PageChanged()" [(ngModel)]="customerChecked[i].enable" type="checkbox">
+            <p>{{cust}}</p>
+        </div>
+    </div>
+    <div *ngIf="disableuserchange" >
+        <button [disabled]="DisableAccess()" *ngIf="selecteduserObj.email != undefined && ( selecteduser != 'New User' || myform.valid)" (click)="SaveChanges()">Save Changes</button>
+        <button [disabled]="DisableAccess()" (click)="DiscardChanges()">Discard Changes</button>
+    </div>
+    <div *ngIf="!disableuserchange" >
+        <button [disabled]="DisableAccess()" (click)="DeleteUser()">Delete User</button>
+    </div>
+</div>
+

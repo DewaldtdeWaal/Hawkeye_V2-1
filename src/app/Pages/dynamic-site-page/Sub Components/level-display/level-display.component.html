@@ -1,0 +1,19 @@
+<!-- <div>
+    <div class="inner-circle">
+        <div class="lvl-font">{{structure.value}}</div>
+    </div>
+</div> -->
+
+<br>
+	<div fxLayoutAlign="center " > 
+		<div class="circle1">
+			<div class="circle2-b">
+				<div [ngStyle]="{'height.%' : 100- structure.value }" class="fill">
+				</div>
+			</div>
+			<div class="font-container">
+				<div class="lvl-font">{{math.trunc(structure.value) }}%</div>
+			</div>
+		</div>
+	</div>
+<br>

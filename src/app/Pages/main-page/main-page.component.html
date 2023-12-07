@@ -1,0 +1,21 @@
+<div class="main-page-working-area">
+    <div class="main-container">
+        <div style="width:80%;height:80%;">
+            <div class="link-list-head">
+                Pages</div>
+            <div class="link-list">
+                <div *ngFor="let x of links" class="list-item-container">
+                    <a class="list-item" (click)="linkClick($event)">{{x.pagename}}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+

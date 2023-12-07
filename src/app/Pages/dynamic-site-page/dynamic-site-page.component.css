@@ -1,0 +1,12 @@
+.main-container{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width:100%;
+}
+
+.sub-container{
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+

@@ -1,0 +1,74 @@
+<p>Driver Name:</p>
+<div class="drop-down">
+    <input (input)="PageChanged()" [(ngModel)]="structure.driverName" type="text" class="drop-down-entry">
+    <div class="drop-down-content">
+        <ng-container *ngFor="let driver of drivers">
+            <div (click)="UpdateTagInformation($event)" class="drop-down-item">{{driver}}</div>
+        </ng-container>
+    </div>
+</div>
+<p>Description:</p>
+<input (input)="PageChanged()" [(ngModel)]="structure.description" type="text" >
+<p>Tag Name:</p>
+<div class="drop-down">
+    <input (input)="PageChanged()" [(ngModel)]="structure.tagName" type="text" class="drop-down-entry">
+    <div class="drop-down-content">
+        <ng-container *ngFor="let tag of tagnames">
+            <div (click)="UpdateTagName($event)" class="drop-down-item">{{tag}}</div>
+        </ng-container>
+    </div>
+</div>
+<p>Use Icon:</p>
+<input (input)="PageChanged()" [(ngModel)]="structure.useIcon" type="checkbox" >
+<div *ngIf="structure.useIcon">
+    <p>True Icon:</p>
+
+    <div class="drop-down" appdropdown>
+        <button class="drop-down-entry myrow">
+        
+            <svg viewBox="0 0 24 24" [attr.width]="20" [attr.height]="20">
+            <use [attr.xlink:href]="'#' + structure.trueIcon"/>
+            </svg>
+            {{structure.trueIcon}}
+        </button>
+        <div class="drop-down-content-standard" >
+            <ng-container *ngFor="let tag of icons">
+                <div (click)="structure.trueIcon = tag" class="drop-down-item myrow">
+                    <svg viewBox="0 0 24 24" [attr.width]="20" [attr.height]="20">
+                    <use [attr.xlink:href]="'#' + tag"/>
+                    </svg>
+                    {{tag}} 
+                </div>
+                
+            </ng-container>
+        </div>
+    </div>
+
+    <p>False Icon:</p>
+    <div class="drop-down" appdropdown>
+        <button class="drop-down-entry myrow">
+        
+            <svg viewBox="0 0 24 24" [attr.width]="20" [attr.height]="20">
+            <use [attr.xlink:href]="'#' + structure.falseIcon"/>
+            </svg>
+            {{structure.falseIcon}}
+        </button>
+        <div class="drop-down-content-standard" >
+            <ng-container *ngFor="let tag of icons">
+                <div (click)="structure.falseIcon = tag" class="drop-down-item myrow">
+                    <svg viewBox="0 0 24 24" [attr.width]="20" [attr.height]="20">
+                    <use [attr.xlink:href]="'#' + tag"/>
+                    </svg>
+                    {{tag}} 
+                </div>
+                
+            </ng-container>
+        </div>
+    </div>
+
+</div>
+<p>True Response:</p>
+<input (input)="PageChanged()" [(ngModel)]="structure.trueResponse" type="text" >
+<p>False Response:</p>
+<input (input)="PageChanged()" [(ngModel)]="structure.falseResponse" type="text" >
+<button (click)="updateChild()">Update</button>

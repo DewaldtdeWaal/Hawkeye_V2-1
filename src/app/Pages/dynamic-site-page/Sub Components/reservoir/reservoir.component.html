@@ -1,0 +1,27 @@
+
+<div (click)="ChangeDirection()" class="main-container">
+    <div class="level-text">
+        <p class="reservoir-text">{{level}}%</p>
+    </div>
+    <div class="sub-container">
+        <div class="svg-main-container" style="z-index:1;">
+            <svg class="svg-main"  [ngClass]="{}">
+                <ellipse class="svg-global" cx="72" cy="22" rx="70" ry="20"/>
+                <line class="svg-global" x1="2" y1="22" x2="2" y2="102"></line>
+                <line class="svg-global" x1="142" y1="22" x2="142" y2="102"></line>
+            </svg>
+        </div>
+        
+        <div [ngClass]="{'move-forward-animation':!animationreverse, 'move-reverse-animation':animationreverse}" class="water-level ">
+            <svg class="water-level-top" style="position:absolute;" [ngStyle]="">
+                <ellipse class="svg-water svg-water-rim"  cx="72" cy="22" rx="70" ry="20"/>
+            </svg>
+            <div [ngClass]="{'fill-forward-animation':!animationreverse, 'fill-reverse-animation':animationreverse}" class="water-level-fill">
+    
+            </div>
+            <svg class="water-bottom-level" >
+                    <ellipse class="svg-water svg-global" cx="72" cy="22" rx="70" ry="20"/>
+            </svg>
+        </div>
+    </div>
+</div>

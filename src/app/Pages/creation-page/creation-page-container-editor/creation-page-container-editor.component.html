@@ -1,0 +1,112 @@
+<div>
+        <p>Container Name:</p>
+        <div>
+            <input (input)="PageChanged()" [(ngModel)]="containerstructure.description" type="text">
+        </div> 
+</div>
+<div >
+    <p>Select Component:</p>
+    <div class="component-selection-container">
+        <app-new-drop-down (mouseenter)="UpdateContainerComponents()" (itemselected)="SelectContainerChild($event)" [items]="components" [selector]="components[0]"></app-new-drop-down>
+        <!-- <div class="drop-down">
+            <input (mouseenter)="UpdateContainerComponents()" [value]="selectedChildName" type="text" class="dropdown-entry">
+            <div class="drop-down-content">
+                <ng-container *ngFor="let component of components">
+                    <div [innerHTML]="component" class="drop-down-item" (click)="SelectContainerChild($event)"></div>
+                </ng-container>
+            </div>
+        </div> -->
+        <ng-container *ngIf="editchild == true">
+            <button (click)="ShiftSelectionUp()">Shift Up</button>
+            <button (click)="ShiftSelectionDown()">Shift Down</button>
+        </ng-container>
+    </div>
+    <ng-container *ngIf="editchild == true">
+        <button (click)="DeleteSelection()">Delete</button>
+    </ng-container>
+</div>
+<ng-container *ngIf="selectedChildName == newcomponentstring">
+    <div>
+        <p>Component Type:</p>
+        <div class="drop-down">
+            <input [value]="selectedtype" type="text" class="dropdown-entry">
+            <div class="drop-down-content">
+                <ng-container *ngFor="let component of componenttypes">
+                    <div [innerHTML]="component" class="drop-down-item" (click)="SelectComponentType($event)"></div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+    <div class="component-generator">
+        <ng-container *ngIf="selectedtype == 'boolean_scan' && editchild == false">
+            <app-boolean-scan-creation (pagechanged)="PageChanged()" (updatechild)="UpdateChild($event)" [structure]="selectedChild" [developertags]="developertags"></app-boolean-scan-creation>
+        </ng-container>
+    </div>
+    <div class="component-generator">
+        <ng-container *ngIf="selectedtype == 'level_display' && editchild == false">
+            <app-level-display-creation (pagechanged)="PageChanged()" (updatechild)="UpdateChild($event)" [structure]="selectedChild" [developertags]="developertags"></app-level-display-creation>
+        </ng-container>
+    </div>
+    <div class="component-generator">
+        <ng-container *ngIf="selectedtype == 'real_scan' && editchild == false">
+            <app-real-scan-creation (pagechanged)="PageChanged()" (updatechild)="UpdateChild($event)" [structure]="selectedChild" [developertags]="developertags"></app-real-scan-creation>
+        </ng-container>
+    </div>
+    <div class="component-generator">
+        <ng-container *ngIf="selectedtype == 'string_scan' && editchild == false">
+            <app-string-scan-creation (pagechanged)="PageChanged()" (updatechild)="UpdateChild($event)" [structure]="selectedChild" [developertags]="developertags"></app-string-scan-creation>
+        </ng-container>
+    </div>
+    <div class="component-generator">
+        <ng-container *ngIf="selectedtype == 'borehole_pump' && editchild == false">
+            <app-borehole-pump-creation (pagechanged)="PageChanged()" (updatechild)="UpdateChild($event)" [structure]="selectedChild" [developertags]="developertags"></app-borehole-pump-creation>
+        </ng-container>
+    </div>
+    <div class="component-generator">
+        <ng-container *ngIf="selectedtype == 'chart' && editchild == false">
+            <app-chart-creation (pagechanged)="PageChanged()" (updatechild)="UpdateChild($event)" [structure]="selectedChild" [developertags]="developertags"></app-chart-creation>
+        </ng-container>
+    </div>
+    <div class="component-generator">
+        <ng-container *ngIf="selectedtype == 'reservoir' && editchild == false">
+            <app-reservoir-creation (pagechanged)="PageChanged()" (updatechild)="UpdateChild($event)" [structure]="selectedChild" [developertags]="developertags"></app-reservoir-creation>
+        </ng-container>
+    </div>
+</ng-container>
+
+<div class="component-generator">
+    <ng-container *ngIf="selectedtype == 'boolean_scan' && editchild == true">
+        <app-boolean-scan-creation (pagechanged)="PageChanged()" (updatechild)="UpdateChild($event)" [structure]="selectedChild" [developertags]="developertags"></app-boolean-scan-creation>
+    </ng-container>
+</div>
+<div class="component-generator">
+    <ng-container *ngIf="selectedtype == 'level_display' && editchild == true">
+        <app-level-display-creation (pagechanged)="PageChanged()" (updatechild)="UpdateChild($event)" [structure]="selectedChild" [developertags]="developertags"></app-level-display-creation>
+    </ng-container>
+</div>
+<div class="component-generator">
+    <ng-container *ngIf="selectedtype == 'real_scan' && editchild == true">
+        <app-real-scan-creation (pagechanged)="PageChanged()" (updatechild)="UpdateChild($event)" [structure]="selectedChild" [developertags]="developertags"></app-real-scan-creation>
+    </ng-container>
+</div>
+<div class="component-generator">
+    <ng-container *ngIf="selectedtype == 'string_scan' && editchild == true">
+        <app-string-scan-creation (pagechanged)="PageChanged()" (updatechild)="UpdateChild($event)" [structure]="selectedChild" [developertags]="developertags"></app-string-scan-creation>
+    </ng-container>
+</div>
+<div class="component-generator">
+    <ng-container *ngIf="selectedtype == 'borehole_pump' && editchild == true">
+        <app-borehole-pump-creation (pagechanged)="PageChanged()" (updatechild)="UpdateChild($event)" [structure]="selectedChild" [developertags]="developertags"></app-borehole-pump-creation>
+    </ng-container>
+</div>
+<div class="component-generator">
+    <ng-container *ngIf="selectedtype == 'chart' && editchild == true">
+        <app-chart-creation (pagechanged)="PageChanged()" (updatechild)="UpdateChild($event)" [structure]="selectedChild" [developertags]="developertags"></app-chart-creation>
+    </ng-container>
+</div>
+<div class="component-generator">
+    <ng-container *ngIf="selectedtype == 'reservoir' && editchild == true">
+        <app-reservoir-creation (pagechanged)="PageChanged()" (updatechild)="UpdateChild($event)" [structure]="selectedChild" [developertags]="developertags"></app-reservoir-creation>
+    </ng-container>
+</div>
+

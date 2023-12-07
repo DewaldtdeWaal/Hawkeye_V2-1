@@ -1,0 +1,29 @@
+  
+.main-container
+{
+  width:100%;
+  display:flex;
+  /* flex-flow:row wrap; */
+  justify-content: space-around;
+}
+
+.development-container
+{
+  width:30%;
+  overflow:auto;
+  
+}
+
+.page-display-container
+{
+  width:70%;
+}
+
+input {
+  width:100%;
+}
+
+.container-manipulation
+{
+  display:flex;
+}

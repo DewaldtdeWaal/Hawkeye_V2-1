@@ -1,0 +1,45 @@
+<div class="main-container">
+    <div class="standard-container">
+        <div class="type-select">
+            
+        </div>
+        <p>Tag Name:</p>
+        <input  (input)="TagChanged()" [(ngModel)]="tagdata.tagName" type="text">
+        <p>Description:</p>
+        <input  (input)="TagChanged()" [(ngModel)]="tagdata.description" type="text">
+        <app-new-drop-down [selector]="tagdata.typeDropDownValue" [items]="types" (itemselected)="tagdata.typeDropDownValue = TagChanged($event)"  [dropdowntag]="'Type:'" [dropdowntagenable]="true"></app-new-drop-down>
+        <ng-container *ngIf="tagdata.typeDropDownValue == 'FLOAT' || tagdata.typeDropDownValue == 'UDINT' || tagdata.typeDropDownValue == 'DINT' || tagdata.typeDropDownValue == 'REAL'">
+            <p>Word Swap Control:</p>
+            <app-new-drop-down [selector]="tagdata.word_swap_control" [items]="['true','false']" (itemselected)="tagdata.word_swap_control = GetBoolean($event.toLowerCase()) " ></app-new-drop-down>
+        </ng-container>
+        <p>Register:</p>
+        <input  (input)="TagChanged()" [(ngModel)]="tagdata.register" type="text">
+        <p>Trend Control:</p>
+        <app-new-drop-down [selector]="tagdata.trend_control" [items]="['true','false']" (itemselected)="tagdata.trend_control = GetBoolean($event.toLowerCase()) " ></app-new-drop-down>
+        <ng-container *ngIf="tagdata.trend_control == true">
+            <p>Trend Period:</p>
+            <app-new-drop-down [selector]="tagdata.periodDropDownValue" [items]="['Every Midnight','Every 12 Hours ','Every 6 Hours','Every Hour','Every 10 Minutes','Every Minute']" (itemselected)="tagdata.periodDropDownValue = $event " ></app-new-drop-down>
+        </ng-container>
+        <ng-container *ngIf="tagdata.typeDropDownValue != 'BOOL' && tagdata.typeDropDownValue != 'STRING_LIST' && tagdata.typeDropDownValue != 'MARSHAL'">
+            <p>Scaling:</p>
+            <input  (input)="TagChanged()" [(ngModel)]="tagdata.scaling" type="text">
+        </ng-container>
+        <ng-container *ngIf="tagdata.typeDropDownValue != 'BOOL' && tagdata.typeDropDownValue != 'STRING_LIST' && tagdata.typeDropDownValue != 'MARSHAL'">
+            <p>Unit:</p>
+            <input  (input)="TagChanged()" [(ngModel)]="tagdata.unit" type="text">
+        </ng-container>
+        <button *ngIf="cansave" (click)="UpdateTag()">Accept Changes</button>
+    </div>
+    <div class="extra-container">
+        <ng-container *ngIf="tagdata.typeDropDownValue == 'STRING_LIST' || tagdata.typeDropDownValue == 'MARSHAL'">
+            <p>Descriptions</p>
+            <p>Tag Name:</p>
+            <input [(ngModel)]="currentDesc" type="text">
+            <button (click)="AddDescription()">Add</button><button (click)="RemoveDescription()">Remove</button><button (click)="SUDescription()">Shift Up</button><button (click)="SDDescription()">Shift Down</button>
+            <div class="sl-m-descriptions">
+                <app-list-box [enablefilter]="false" (itemselected)="currentDesc = $event.substring($event.indexOf(':')+1).trim()" [items]="UpdateDescriptions()"></app-list-box>
+            </div>
+        </ng-container>
+    </div>
+</div>
+

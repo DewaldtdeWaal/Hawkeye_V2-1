@@ -1,0 +1,38 @@
+
+
+<div style="border-style: solid;border-width: 2px; border-color:black; margin-bottom: 20px;">
+    <p>Chart Name:</p>
+    <input (input)="PageChanged()" [(ngModel)]="structure.description" type="text">
+    <p>Left Axis Unit:</p>
+    <input (input)="PageChanged()" [(ngModel)]="leftname" type="text">
+    <div class="checkbox-container">
+        <p>Enable Right Axis: </p>
+        <input (input)="PageChanged()" class="checkbox" [(ngModel)]="enableright" type="checkbox">
+    </div>
+    <div *ngIf="enableright">
+        <p>Right Axis Unit:</p>
+        <input (input)="PageChanged()" [(ngModel)]="rightname" type="text">
+    </div>
+</div>
+<div style="border-style: solid;border-width: 2px; border-color:black; margin-bottom: 20px;">
+    <p>Site:</p>
+    <app-new-drop-down (mouseenter)="UpdateItems()" (itemselected)="OnSiteItemSelected($event)" [items]="siteitems" [selector]="selectedsite"></app-new-drop-down>
+    <p>Tag:</p>
+    <app-new-drop-down (mouseenter)="UpdateTags()" (itemselected)="OnTagItemSelected($event)" [items]="tagitems" [selector]="selectedtag"></app-new-drop-down>
+    <p>Alias:</p>
+    <input (input)="PageChanged()" [(ngModel)]="alias" type="text">
+    <p>Type:</p>
+    <app-new-drop-down (itemselected)="OnTypeItemSelected($event)" [items]="typeitems" [selector]="selectedtype"></app-new-drop-down>
+    <div class="checkbox-container">
+        <p>Use Right Axis: </p>
+        <input (input)="PageChanged()" class="checkbox" [(ngModel)]="currentitemura" type="checkbox">
+    </div>
+    <button (click)="AddItem()">Add Item</button>
+</div>
+
+<div>
+    <app-list-box class="tag-select" [items]="createditems" (itemselected)="SelectCreatedItem($event)"></app-list-box>
+    <button *ngIf="selecteditem" (click)="DeleteCreatedItem()">Delete Item</button>
+</div>
+<button (click)="updateChild()">Update</button>
+

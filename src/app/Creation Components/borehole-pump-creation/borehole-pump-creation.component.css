@@ -1,0 +1,15 @@
+.color-group
+{
+    display:flex;
+}
+
+.color-entry
+{
+    width:50px;
+}
+
+.color-display
+{
+    height:inherit;
+    width:50px;
+}

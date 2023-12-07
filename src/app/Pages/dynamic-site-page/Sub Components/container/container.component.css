@@ -1,0 +1,26 @@
+.container-head {
+    background-color: #777777;
+    border-style: solid;
+    border-color: black;
+    margin-top: 20px;
+    box-shadow: 5px 5px 5px #222222;
+    width:100%;
+}
+
+.container-description-holder {
+    background-color: black; 
+    height: 30px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.container-description {
+    color: white;
+}
+
+.component-container{
+    display:flex;
+    justify-content: center;
+    width:100%;
+}

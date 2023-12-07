@@ -1,0 +1,73 @@
+/* You can add global styles to this file, and also import other style files */
+html,body{
+    height:100%;
+    width:100%;
+}
+
+.drop-down
+{
+    width:200px;
+}
+
+.drop-down-content
+{
+    width: inherit;
+    max-width: 1000px;
+    display:none;
+    position: absolute;
+    background-color: white;
+    max-height: 100px;
+    overflow:auto;
+}
+
+.drop-down-entry
+{
+    width: inherit;
+    max-width: inherit;
+    height:25px;
+}
+
+.drop-down:hover .drop-down-content
+{
+    display: block;
+}
+
+.drop-down-content-standard
+{
+    width: inherit;
+    max-width: 1000px;
+    display:none;
+    position: absolute;
+    background-color: white;
+    max-height: 100px;
+    overflow:auto;
+}
+
+.drop-down-open .drop-down-content-standard
+{
+    display:block;
+}
+
+
+
+.drop-down-item:hover
+{
+    background-color: blue;
+    color: white;
+    cursor: pointer;
+}
+
+.drop-down-item
+{
+    width: inherit;
+    max-width: inherit;
+}
+
+p 
+{
+    color:black;
+}
+
+
+
+

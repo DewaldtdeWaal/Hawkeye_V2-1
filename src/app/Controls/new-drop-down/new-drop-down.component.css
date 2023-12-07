@@ -1,0 +1,23 @@
+.selector
+{
+    height:25px;
+    
+
+}
+
+.main-container
+{
+    display:flex;
+    flex-flow:column nowrap;
+    min-width: 200px;
+}
+
+.filter-container
+{
+    width:100%;
+}
+
+.item-filter
+{
+    width:100%;
+}

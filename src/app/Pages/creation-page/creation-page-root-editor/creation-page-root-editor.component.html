@@ -1,0 +1,17 @@
+<div  class="main-container">
+    <p>Page Name:</p> 
+    <input [disabled]="structure.dummy != undefined" (input)="PageChanged()" [(ngModel)]="structure.pageName" type="text" style="width:200px;">
+    <p>Customer:</p> 
+    <div class="list-box">
+        <app-new-drop-down  [disabled]="structure.dummy != undefined" [items]="customers" (itemselected)="CustomerItemSelected($event)" [emptyoption]="false" [selector]="GetCustomer()" ></app-new-drop-down>
+    </div>
+    <p>Heirarchy:</p>
+    <input  [disabled]="structure.dummy != undefined" [(ngModel)]="heirarchyitem" type="text">
+    <button (click)="HeirarchyAddItem()" [disabled]="structure.dummy != undefined" >Add</button><button (click)="HeirarchyRemoveItem()" [disabled]="structure.dummy != undefined" >Remove</button>
+    <div class="list-box">
+        <app-list-box [disabled]="structure.dummy != undefined" [items]="this.structure.pageheirarchy" [enablefilter]="false" (itemselected)="HeirarchyItemSelected($event)" ></app-list-box>
+    </div>
+    <p>New Container Name:</p> 
+    <input [disabled]="structure.dummy != undefined" type="text" style="width:200px;" #containerbox>
+    <button [disabled]="structure.dummy != undefined" (click)="AddContainer($event)">Add Container</button>
+</div>  

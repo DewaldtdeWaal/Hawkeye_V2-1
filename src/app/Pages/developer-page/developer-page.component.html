@@ -1,0 +1,19 @@
+<div class="developer-container">
+    <p>Page Selector:</p>
+    <div class="page-manipulation-container">
+            <!-- <app-drop-down (mouseenter)="UpdatePages()" (itemselected)="UpdateCurrentStructure($event)" [items]="pages" [disable]="pagechangedisabled" [selector]="currentstructureselector"></app-drop-down> -->
+            <app-new-drop-down (mouseenter)="UpdatePages()" (itemselected)="UpdateCurrentStructure($event)" [items]="pages" [disabled]="pagechangedisabled" [selector]="currentstructureselector"></app-new-drop-down>
+            <ng-container  *ngIf="cansave && pagechangedisabled">
+                <button (click)="SavePage()">Save Page</button>
+            </ng-container>
+            <ng-container  *ngIf="cansave && pagechangedisabled">
+                <button (click)="DiscardChanges()">Discard Changes</button>
+            </ng-container>
+    </div>
+    <ng-container  *ngIf="currentstructure != null && currentstructure != undefined && currentstructure.pageName != undefined && !hidedelete && currentstructureselector != newpagestring">
+        <button (click)="DeletePage()">Delete Page</button>
+    </ng-container>
+    <div class="creation-page-container">
+        <app-creation-page [disabled]="disablecreationpage" (pagechanged)="PageChanged()" [structure]="currentstructure" [customers]="customers" [developertags]="developertags"></app-creation-page>
+    </div>
+</div>

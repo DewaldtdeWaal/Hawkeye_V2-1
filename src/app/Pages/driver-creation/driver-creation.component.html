@@ -1,0 +1,35 @@
+<div class="main-container">
+	<div class="sub-container" >
+		<div>
+			<input type="file" id="picker">
+			<button class="read-btn" (click)="ReadData()" >Read File</button>
+		</div>
+	</div>
+	<div class="site-container">
+		<div class="input-container" >
+			<div class="input-sub-container">
+				<app-list-box class="tag-select" [items]="sitenames" (itemselected)="GetSite($event)" [disabled]="disablesiteselection"></app-list-box>
+				<div *ngIf="selectedsite!=null">
+					<p>Driver Name:</p>
+					<div style="display:flex;flex-flow:row wrap;">
+						<input [(ngModel)]="selectedsite.driverName" type="text">
+						<button *ngIf="displaysave" (click)="SaveSite()">Accept Changes</button>
+					</div>
+					<p>IP Address:</p>
+					<input (input)="ValueChanged()" [(ngModel)]="selectedsite.ipAddress" type="text">
+					<p>Description:</p>
+					<input (input)="ValueChanged()" [(ngModel)]="selectedsite.description" type="text">
+					<p>Tags:</p>
+					<app-list-box class="tag-select" [items]="tagnames" (itemselected)="SetSelectedTag($event)" [disabled]="disabletagselector"></app-list-box>
+				</div>
+			</div>
+		</div>
+		<div class="tag-container" >
+			<div class="tag-sub-container">
+				<div *ngIf="currenttag != null">
+					<app-tag-editor (datachanged)="TagEditorChange()" (datasaved)="TagEditorSaved()" *ngIf="currenttag != null" class="tag-edit" [tagdata]="currenttag"></app-tag-editor>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

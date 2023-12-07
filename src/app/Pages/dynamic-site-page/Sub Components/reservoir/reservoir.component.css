@@ -1,0 +1,177 @@
+.main-container
+{
+    position:relative;
+    width:144px;
+    height:124px;
+    margin-top:10px;
+    margin-bottom:10px;
+}
+
+.level-text
+{
+    position:absolute;
+    top:0px;
+    left:0px;
+    width:100%;
+    height:68%;
+    display:flex;
+    flex-flow: column nowrap;
+    text-align: center;
+    justify-content: end;
+    z-index: 5;
+    
+}
+
+.reservoir-text
+{
+    color: var(--reservoir-color)
+}
+
+.sub-container
+{
+    z-index: auto;
+    position:relative;
+    width:max-content;
+    height:max-content;
+}
+
+.water-level
+{
+    position:absolute;
+    width:100%;
+    height:100%;
+    z-index: 0;
+    top:80px;
+}
+
+.water-level-top
+{
+    z-index: 2;
+    width:144px;
+    height:44px;
+}
+
+.water-level-fill
+{
+    z-index: 1;
+    background-color: var(--water-color);
+    width:140px;
+    height:2px;
+    position:relative;
+    top:22px;
+    left:2px;
+}
+
+.fill-forward-animation
+{
+    animation-name: filllvl;
+    animation-duration: var(--animation-speed);
+    animation-fill-mode: forwards;
+}
+
+.fill-reverse-animation
+{
+    animation-name: filllvlrev;
+    animation-duration: var(--animation-speed);
+    animation-fill-mode: forwards;
+}
+
+.move-forward-animation
+{
+    animation-name: movelvl;
+    animation-duration: var(--animation-speed);
+    animation-fill-mode: forwards;
+}
+
+.move-reverse-animation
+{
+    animation-name: movelvlrev;
+    animation-duration: var(--animation-speed);
+    animation-fill-mode: forwards;
+}
+
+.water-bottom-level
+{
+    position: absolute;
+    z-index:0;
+    width:144px;
+    height:44px;
+}
+
+.svg-main
+{
+    z-index:1;
+    position:absolute;
+    top:0px;
+    left:0px;
+    width:144px;
+    height:102px;
+}
+
+.svg-water-rim
+{
+    
+    fill: var(--water-color);
+    stroke:var(--water-rim-color);
+    stroke-width:2;
+}
+
+.svg-global
+{
+    fill:transparent;
+    stroke:var(--reservoir-color);
+    stroke-width:2;
+}
+
+.svg-water
+{
+    fill: var(--water-color);
+}
+
+@keyframes filllvl
+{
+    from
+    {
+        height:0px;
+    }
+    to
+    {
+        height:var(--height-size);
+    }
+}
+
+@keyframes filllvlrev
+{
+    from
+    {
+        height:var(--height-size);
+    }
+    to
+    {
+        height:0px;
+    }
+}
+
+@keyframes movelvl
+{
+    from
+    {
+        top:80px;
+    }
+    to
+    {
+        top:var(--target-height);
+    }
+}
+
+@keyframes movelvlrev
+{
+    from
+    {
+        top:var(--target-height);
+    }
+    to
+    {
+        top:80px;
+    }
+}

@@ -1,0 +1,21 @@
+<p>Driver Name:</p>
+<div class="drop-down">
+    <input (input)="PageChanged()" [(ngModel)]="structure.driverName" type="text" class="drop-down-entry">
+    <div class="drop-down-content">
+        <ng-container *ngFor="let driver of drivers">
+            <div (click)="UpdateTagInformation($event)" class="drop-down-item">{{driver}}</div>
+        </ng-container>
+    </div>
+</div>
+<p>Description:</p>
+<input (input)="PageChanged()" [(ngModel)]="structure.description" type="text" >
+<p>Tag Name:</p>
+<div class="drop-down">
+    <input (input)="PageChanged()" [(ngModel)]="structure.tagName" type="text" class="drop-down-entry">
+    <div class="drop-down-content">
+        <ng-container *ngFor="let tag of tagnames">
+            <div (click)="UpdateTagName($event)" class="drop-down-item">{{tag}}</div>
+        </ng-container>
+    </div>
+</div>
+<button (click)="updateChild()">Update</button>

@@ -1,0 +1,10 @@
+<div class="drop-down">
+    <input (mouseenter)="MouseEnter()" [disabled]="disable" [value]="selector" type="text" class="drop-down-entry">
+    <ng-container *ngIf="!disable">
+        <div class="drop-down-content">
+            <ng-container *ngFor="let item of items">
+                <div (click)="ItemClicked($event)" class="drop-down-item">{{item}}</div>
+            </ng-container>
+        </div>
+    </ng-container>
+</div>

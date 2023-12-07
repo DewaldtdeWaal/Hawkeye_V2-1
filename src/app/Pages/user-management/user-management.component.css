@@ -1,0 +1,8 @@
+.myrow
+{
+    display: flex;
+    flex-flow: row nowrap;
+    place-content: left center;
+    place-items: left center;
+    height:30px
+}

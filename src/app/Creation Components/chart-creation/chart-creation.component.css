@@ -1,0 +1,14 @@
+.checkbox
+{
+    width:auto;
+    height:auto;
+}
+
+.checkbox-container
+{
+    height:30px;
+    display:flex;
+    flex-flow: row nowrap;
+    justify-content: left;
+    align-items: center;
+}

@@ -1,0 +1,7 @@
+    <svg style="display:none" class="global-svg">
+        <symbol id="cross">
+            <circle class="cross-rim" cx="12" cy="12" r="10"/>
+            <line class="check-mark" x1="6" y1="6" x2="18" y2="18"></line>
+            <line class="check-mark" x1="6" y1="18" x2="18" y2="6"></line>
+        </symbol>
+    </svg>

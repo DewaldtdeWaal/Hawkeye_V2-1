@@ -1,0 +1,49 @@
+.main-container
+{
+    width:100%;
+    height:100%;
+    display:flex;
+    flex-flow: row wrap;
+    place-content: center center;
+    margin-top: 10px;
+}
+
+/* .secondary-container
+{
+     height:100px;
+    width:300px;
+    display:flex;
+    flex-flow:column nowrap;
+    justify-content: center;
+    align-items: center; 
+} */
+
+.trend-container
+{
+    width:100%;
+    display:flex;
+    place-content: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.trend
+{
+    background-color: #333333;
+    border-radius: 10px;
+    width:90%;
+    height:400px;
+}
+
+button
+{
+    border-radius: 10px;
+    width:200px;
+    height:30px;
+}
+input
+{
+    border-radius: 10px;
+    width:200px;
+    height:30px;
+}

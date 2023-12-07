@@ -1,0 +1,47 @@
+
+<p *ngIf="!structure.useIcon" [innerHTML]="GetDisplayValue()" style="color:black;"></p>
+
+<div class="myrow" *ngIf="structure.useIcon">
+    <p [innerHTML]="structure.description + ' = '" style="color:black;"></p>
+    <svg style="display:none" class="global-svg">
+        <symbol id="check">
+            <circle class="check-rim" cx="12" cy="12" r="10"/>
+            <line class="check-mark" x1="11" y1="17" x2="17" y2="6"></line>
+            <line class="check-mark" x1="11" y1="18" x2="8" y2="11"></line>
+        </symbol>
+    </svg>
+    
+    <svg style="display:none" class="global-svg">
+        <symbol id="cross">
+            <circle class="cross-rim" cx="12" cy="12" r="10"/>
+            <line class="check-mark" x1="6" y1="6" x2="18" y2="18"></line>
+            <line class="check-mark" x1="6" y1="18" x2="18" y2="6"></line>
+        </symbol>
+    </svg>
+
+    <svg style="display:none;width:24px;height:24px;">
+        <symbol id="door closed">
+            <circle style="stroke:white;stroke-width:1;fill:green;" class="cross-rim" cx="12" cy="12" r="10"/>
+            <rect style="stroke:white;stroke-width:1;fill:transparent;" x="7" y="4.5" width="10" height="15"></rect>
+            <circle style="stroke:white;stroke-width:1;fill:transparent;" class="cross-rim" cx="15" cy="11" r="1"/>
+        </symbol>
+    </svg>
+
+    <svg style="display:none;width:24px;height:24px;">
+        <symbol id="door open">
+            <circle style="stroke:white;stroke-width:1;fill:yellow;" class="cross-rim" cx="12" cy="12" r="10"/>
+            <rect style="stroke:black;stroke-width:1;fill:transparent;" x="7" y="4.5" width="10" height="15"></rect>
+            <circle style="stroke:black;stroke-width:1;fill:transparent;" class="cross-rim" cx="15" cy="11" r="1"/>
+        </symbol>
+    </svg>
+
+
+    <svg *ngIf="GetValue()" viewBox="0 0 24 24" [attr.width]="iconsize" [attr.height]="iconsize">
+        <use [attr.xlink:href]="'#' + structure.trueIcon"/>
+    </svg>
+
+    <svg *ngIf="!GetValue()" viewBox="0 0 24 24" [attr.width]="iconsize" [attr.height]="iconsize">
+        <use  [attr.xlink:href]="'#' + structure.falseIcon"/>
+    </svg>
+
+</div>

@@ -1,0 +1,29 @@
+.main-container
+{
+    width:100%;
+    height:100%;
+    display:flex;
+    flex-flow:row nowrap;
+}
+
+.standard-container
+{
+    width:50%;
+    
+}
+
+.extra-container
+{
+    width:50%;
+}
+
+.type-select
+{
+    width:200px;
+}
+
+.sl-m-descriptions
+{
+    height:300px;
+    overflow: auto;
+}

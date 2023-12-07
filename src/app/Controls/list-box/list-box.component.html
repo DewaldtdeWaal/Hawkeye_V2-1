@@ -1,0 +1,7 @@
+<input *ngIf="enablefilter" [disabled]="disabled" class="input" [(ngModel)]="filter" (input)="Filter($event)" type="text">
+<div class="main-container">
+    <div *ngFor="let item of filtereditems">
+        <div (click)="ItemSelected($event)" class="highlightable">{{item}}</div>
+    </div>
+</div>
+

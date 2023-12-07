@@ -1,0 +1,36 @@
+<div class="main-container">
+    <div class="development-container">
+        <p>Container Selector:</p>
+        <div class="container-manipulation">
+            <!-- <div (mouseenter)="GetComponentList($event)" class="drop-down">
+                <input [value]="component" type="text">
+                <div class="drop-down-content">
+                    <ng-container  *ngFor="let component of componentList">
+                        <div class="drop-down-item" (click)="SetParent($event)" [innerHTML]="component" ></div>
+                    </ng-container>
+                </div>
+            </div> -->
+
+            <app-new-drop-down (mouseenter)="GetComponentList(null)" (itemselected)="SetParent($event)" [items]="componentList" [selector]="componentList[0]"></app-new-drop-down>
+
+            <ng-container *ngIf="component != 'page' && !disabled">
+                <button [disabled]="disabled" (click)="ShiftSelectionLeft()">Shift Left</button>
+                <button [disabled]="disabled" (click)="ShiftSelectionRight()">Shift Right</button>
+            </ng-container>
+        </div>
+        <ng-container *ngIf="component != 'page' && !disabled">
+            <button [disabled]="disabled" (click)="DeleteSelection()">Delete</button>
+        </ng-container>
+        <div class="editor-container">
+            <ng-container *ngIf="component == 'page' && !disabled">
+                <app-creation-page-root-editor (pagechanged)="PageChanged()" [structure]="structure" [customers]="customers" (updateroot)="updateroot($event)"></app-creation-page-root-editor>
+            </ng-container>
+            <ng-container *ngIf="component != 'page' && !disabled">
+                <app-creation-page-container-editor (pagechanged)="PageChanged()"  [structure]="structure" [containerdescription]="component" [developertags]="developertags"></app-creation-page-container-editor>
+            </ng-container>
+        </div>        
+    </div>
+    <div class="page-display-container">
+        <app-dynamic-site-page class="page-viewer-container" [structure]="structure"></app-dynamic-site-page>
+    </div>
+</div>

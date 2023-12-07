@@ -1,0 +1,13 @@
+p
+{
+    color:black;
+}
+
+.myrow
+{
+    display:flex;
+    flex-flow: row nowrap;
+    place-content: center center;
+    align-items: center center;
+    text-align: center;
+}

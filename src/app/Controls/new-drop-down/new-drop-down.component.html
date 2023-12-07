@@ -1,0 +1,15 @@
+<div class="main-container">
+    <div *ngIf="enablefilter" class="filter-container">
+            <p >{{filtername}}</p>
+        <input [disabled]="disabled" [(ngModel)]="itemfilter" class="item-filter" type="text">
+    </div>
+    <div *ngIf="dropdowntagenable">
+        <p >{{dropdowntag}}</p>
+    </div>
+    <select [disabled]="disabled" [(ngModel)]="selector" class="selector" (input)="ItemClicked($event)">
+        <option *ngIf="emptyoption" [disabled]="disabled" value="Select"></option>
+    <ng-container *ngFor="let item of items">
+        <option *ngIf="!enablefilter || item.includes(itemfilter)" [disabled]="disabled"  value="{{item}}">{{item}}</option>
+    </ng-container>
+    </select>
+</div>

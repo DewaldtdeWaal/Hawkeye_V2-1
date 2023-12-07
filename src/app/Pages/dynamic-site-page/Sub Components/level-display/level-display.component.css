@@ -1,0 +1,49 @@
+.circle1 {
+    width:200px;
+    height:200px;
+    border:5px solid #444444;
+    border-radius: 100%;
+  }
+  .circle2-b {
+    width:100%;
+    height:100%;
+    border:7px solid black;
+    border-radius: 100%;
+    overflow: hidden;
+    background-color: rgba(94, 94, 229, 0.492);
+    position: inherit;
+  }
+  
+  .fill{
+    padding:0px;
+    width: 100%;
+    background:#444444;
+  }
+  .lvl-font{
+    color: black;;
+    font-size:35px;
+    font-weight:500;
+  }
+
+  .font-container
+  {
+    width:100%;
+    height:100%;
+    background-color: transparent;
+    position: relative;
+    top:-100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  @keyframes fill {
+    from {
+  
+      transform:translateX(-50%) rotate(0deg);
+    }
+    to {
+  
+      transform:translateX(-50%) rotate(360deg);
+    }
+  }

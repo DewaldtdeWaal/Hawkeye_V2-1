@@ -1,0 +1,12 @@
+
+<div class="main-container">
+    <div class="secondary-container">
+        <input [(ngModel)]="starttime" type="date">
+        <input [(ngModel)]="endtime" type="date">
+        <button (click)="Trend()">Trend</button>
+    </div>
+    <div class="trend-container">
+        <div *ngIf="!disableChart" echarts [options]="options" class="trend"></div>
+    </div>
+</div>
+

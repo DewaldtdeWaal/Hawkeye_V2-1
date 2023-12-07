@@ -1,0 +1,26 @@
+.developer-container
+{
+    display:block;
+    width:100%;
+    height:100%;
+}
+.creation-page-container
+{
+    width:100%;
+    height:50%;
+}
+
+.line
+{
+    color: black;
+    width:100%;
+}
+
+.page-manipulation-container
+{
+    display:flex;
+
+}
+
+ 
+

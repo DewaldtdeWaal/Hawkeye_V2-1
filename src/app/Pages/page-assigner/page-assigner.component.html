@@ -1,0 +1,12 @@
+<div class="main-container">
+    <div class="split">
+        <div class="split">
+            <p>{{currentuser}}</p>
+            <app-list-box [disabled]="disableuserchange" (itemselected)="UpdateSiteSelections($event)" [enablefilter]="false" [items]="users"></app-list-box>
+            <button *ngIf="disableuserchange" class="nogrow" (click)="UpdateUser()">Update User</button>
+            <button *ngIf="saveable" class="nogrow" (click)="SaveUsers()">Save Changes</button>
+        </div>
+        <app-embedded-drop-down (valuechanged)="HeirarchyValueChanged()" [structure]="displayheir"></app-embedded-drop-down>
+    </div>
+</div>
+

@@ -1,0 +1,58 @@
+ <div class="main-container">
+    <div class="sub-container">
+        <div class="center-container">
+            <p class="main-text">User Login</p>
+            <hr>
+            <form (ngSubmit)="OnSubmit()" #f="ngForm">
+                <p class="sub-text">Email Address:</p>
+
+                <input 
+                type="email"
+                class="input-item"
+                ngModel
+                email
+                name="email"
+                required
+                #emailcontrol="ngModel">
+                <div *ngIf="!emailcontrol.valid && emailcontrol.touched" class="alert sub-text" >Please Enter A Valid Email Address!</div>
+                <p class="sub-text">Password:</p>
+                
+                <input 
+                type="password"
+                class="input-item"
+                ngModel
+                password
+                name="password"
+                required
+                #passwordcontrol="ngModel"
+                >
+                <div *ngIf="!passwordcontrol.valid && passwordcontrol.touched" class="alert sub-text" >Please Enter A Valid Password!</div>
+                <div ngModelGroup="Extra">
+                    <p class="sub-text">Security Question:</p>
+                    <select 
+                    class="input-item" 
+                    name="secret"
+                    [ngModel]="defaultQuestion"
+                    required>
+                        <option value="Pet">Your First Pet?</option>
+                        <option value="Teacher">Your First Teacher?</option>
+                    </select>
+    
+                    <input 
+                    type="text"
+                    class="input-item"
+                    ngModel
+                    name="secretAnswer"
+                    required
+                    #answercontrol="ngModel"
+                    >
+                    <div *ngIf="!answercontrol.valid && answercontrol.touched" class="alert sub-text" >Please Enter A Valid Answer!</div>
+                </div>
+                <hr>
+                <div class="center-item">
+                    <button [disabled]="!f.valid" type="submit" class="form-button">Login</button>
+                </div>
+             </form>
+        </div>
+    </div>
+ </div>

@@ -1,0 +1,32 @@
+.check-rim
+{
+    fill: green;
+    stroke:white;
+    stroke-width:1;
+}
+
+.check-mark
+{
+    z-index:500;
+    stroke:white;
+    stroke-width:2;
+}
+
+.cross-rim
+{
+    fill: red;
+    stroke:white;
+    stroke-width:1;
+}
+
+.global-svg
+{
+    width:24px;
+    height:24px;
+}
+
+.myrow
+{
+    display: flex;
+    flex-flow: row nowrap;
+}
