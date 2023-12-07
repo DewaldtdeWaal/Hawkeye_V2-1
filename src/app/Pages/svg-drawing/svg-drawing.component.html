@@ -1,0 +1,12 @@
+<p>Path:</p>
+<input [(ngModel)]="svgsettings" type="text">
+<p>Circle Center X:</p>
+<input [(ngModel)]="circlecenterx" type="text">
+<p>Circle Center X:</p>
+<input [(ngModel)]="circlecentery" type="text">
+<p>Circle Radius:</p>
+<input [(ngModel)]="circleradius" type="text">
+<svg style="height:50%;width:100%;background-color:white;">
+    <path [attr.d]="svgsettings" fill="transparent" stroke="black" />
+    <circle [attr.cx]="circlecenterx" [attr.cy]="circlecentery" [attr.r]="circleradius" />
+</svg>

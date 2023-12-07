@@ -41,6 +41,9 @@
         <ng-container  *ngIf="currentpage == 'usermanagement'">
             <app-user-management [userdata]="userdata" [customers]="userdata.customers"></app-user-management>
         </ng-container>
+        <ng-container  *ngIf="currentpage == 'svgdrawing'">
+            <app-svg-drawing></app-svg-drawing>
+        </ng-container>
     </div>
 </div>
 

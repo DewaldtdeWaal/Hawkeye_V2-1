@@ -117,6 +117,11 @@ export class AppMainComponent implements OnDestroy, AfterContentInit {
         this.links.push({pagename:"Page Developer", navpage:"development"})
         this.links.push({pagename:"Driver Creation", navpage:"drivercreation"})
       }
+      if(this.userdata.superuser)
+      {
+        
+        this.links.push({pagename:"SVG Drawing", navpage:"svgdrawing"})
+      }
       
   }
 
