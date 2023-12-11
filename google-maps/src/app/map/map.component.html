@@ -1,0 +1,19 @@
+  MapComponent html
+<div id="map" style="height: 500px;"></div>
+
+<google-map>
+    <div class="icon">
+                            <i aria-hidden="true" class="fa fa-icon" [ngClass]="'fa-' + property.type" [title]="property.type"></i>
+                            <span class="fa-sr-only">{{ property.type }}</span>
+                              </div>
+                              <div class="details">
+                                  <div class="address">{{ property.address }}</div>
+                                  <div class="features">
+                                      <div>
+                                          <i aria-hidden="true" class="fa fa-ruler fa-lg size" title="size"></i>
+                                          <span class="fa-sr-only">size</span>
+                                          <span>{{ property.size }} ft<sup>2</sup></span>
+                                      </div>
+                                  </div>
+                        </div>
+</google-map>
