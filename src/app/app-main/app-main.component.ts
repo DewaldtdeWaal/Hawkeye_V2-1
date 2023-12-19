@@ -5,6 +5,7 @@ import { UserAuthenticationService } from '../user-authentication.service';
 import { Router } from '@angular/router';
 import { SiteStorageService } from '../site-storage.service';
 import { CommunicationService } from '../communication.service';
+import { HeirarchyEditor } from '../heirarchy-editor.service';
 
 @Component({
   selector: 'app-app-main',
@@ -23,8 +24,9 @@ export class AppMainComponent implements OnDestroy, AfterContentInit {
   fontsize:any = 15;
   timer:any =  null;
   private tokenlistener: Subscription = null;
+  pageheirarchy:any = {}
 
-  constructor(private http: HttpClient, private userauth:UserAuthenticationService, private router: Router, private siteStorage:SiteStorageService,private commservice:CommunicationService)
+  constructor(private http: HttpClient, private userauth:UserAuthenticationService, private router: Router, private siteStorage:SiteStorageService,private commservice:CommunicationService, private heirarchyservice:HeirarchyEditor)
   {
   }
 
@@ -35,6 +37,7 @@ export class AppMainComponent implements OnDestroy, AfterContentInit {
     this.userdata = this.siteStorage.getStructure()
     if(this.userdata)
     {
+      this.pageheirarchy = this.heirarchyservice.GetStructure(this.userdata.pages)
       this.UpdateLinks()
       this.GetPageVariables(this.http)
     }
@@ -42,7 +45,6 @@ export class AppMainComponent implements OnDestroy, AfterContentInit {
     {
       this.GetUserData(this.http)
     }
-    //
 
     this.tokenlistener = this.userauth.getAuthListener().subscribe((isauthenticated)=>
     {
@@ -95,6 +97,7 @@ export class AppMainComponent implements OnDestroy, AfterContentInit {
 
       this.UpdateLinks()
       this.GetPageVariables(http)
+      this.pageheirarchy = this.heirarchyservice.GetStructure(this.userdata.pages);
     })
   }
 
@@ -103,10 +106,10 @@ export class AppMainComponent implements OnDestroy, AfterContentInit {
     this.links = []
       var page:[{pageName:""}] = this.userdata.pages
 
-      for(var item = 0; item < page.length; item++)
-      {
-        this.links.push({pagename:page[item].pageName, navpage:"site"})
-      }
+      // for(var item = 0; item < page.length; item++)
+      // {
+      //   this.links.push({pagename:page[item].pageName, navpage:"site"})
+      // }
       if(this.userdata.admin)
       {
         this.links.push({pagename:"Page Assignments",navpage:"assignment"})
@@ -204,6 +207,14 @@ export class AppMainComponent implements OnDestroy, AfterContentInit {
 
         
       }
+      else if(sitestructure.componentType == "marshal" || sitestructure.componentType == "stringlist")
+      {
+        if(variableData[sitestructure.driverName] != undefined)
+          if(variableData[sitestructure.driverName][sitestructure.tagName] != undefined)
+            sitestructure["value"] = variableData[sitestructure.driverName][sitestructure.tagName]
+
+        sitestructure["descriptions"] = variableData.lists[sitestructure.tagName]
+      }
       else
       {
         if(variableData[sitestructure.driverName] != undefined)
@@ -217,6 +228,8 @@ export class AppMainComponent implements OnDestroy, AfterContentInit {
 
   TakeMeHome()
   {
+    
+    this.pageheirarchy = this.heirarchyservice.GetStructure(this.userdata.pages)
     this.changepage({pagename:"Main Page",navpage:"mainpage"});
   }
 

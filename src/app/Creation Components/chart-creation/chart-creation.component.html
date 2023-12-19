@@ -27,6 +27,10 @@
         <p>Use Right Axis: </p>
         <input (input)="PageChanged()" class="checkbox" [(ngModel)]="currentitemura" type="checkbox">
     </div>
+    <div class="checkbox-container">
+        <p>Use Flow Rate Calculations: </p>
+        <input (input)="PageChanged()" class="checkbox" [(ngModel)]="ApplyFRCalculations" type="checkbox">
+    </div>
     <button (click)="AddItem()">Add Item</button>
 </div>
 

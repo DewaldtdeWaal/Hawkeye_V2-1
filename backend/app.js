@@ -26,6 +26,7 @@ class QueryData
     Users = []
     UserPages = []
     Drivers = []
+    CloudWorks = []
 }
 
 const app = express();
@@ -101,6 +102,8 @@ async function Login(req, res, next)
                         if(userEntry.developer == true)
                         {
                             siteread["developerTags"] = GetDeveloperTags(dev)
+                            var cwT = GetCloudWorksTags(queryData.CloudWorks)
+                            Object.assign(siteread.developerTags, cwT)
                             siteread["driverdata"] = dev
                         }
                     }
@@ -180,6 +183,11 @@ async function PostRouting(req, res, next)
                 if(userEntry.developer == true)
                 {
                     output.userdata["developerTags"] = GetDeveloperTags(dev)
+                    var cwT = GetCloudWorksTags(queryData.CloudWorks)
+
+
+
+                    Object.assign(output.userdata.developerTags, cwT)
                     output.userdata["driverdata"] = dev
                 }
             }
@@ -232,16 +240,27 @@ async function PostRouting(req, res, next)
                 queryForTags["$or"].push(newItem);
             }
         
-            var responseData = output = queryData.Drivers.filter((value) => {     
+            var responseData = queryData.Drivers.filter((value) => {     
                                                                                     for(var i = 0; i < queryForTags.$or.length; i++)
                                                                                     {
                                                                                         if(value.driverName == queryForTags.$or[i].driverName)
                                                                                             return true
                                                                                     }
                                                                                         return false
-                                                                                    })//await getFromDB("NMBM_drivers",queryForTags,{})
+                                                                                    })
+
+            var responseCloudWorksData = queryData.CloudWorks.filter((value) => {     
+                                                                                    for(var i = 0; i < queryForTags.$or.length; i++)
+                                                                                    {
+                                                                                        if(value.SiteName == queryForTags.$or[i].driverName)
+                                                                                            return true
+                                                                                    }
+                                                                                        return false
+                                                                                    })
     
             SetTags(varaibleGroupings, responseData);
+
+            SetTags(varaibleGroupings,responseCloudWorksData);
     
             console.log("Sent Variables to " + post.user)
 
@@ -479,7 +498,7 @@ async function PostRouting(req, res, next)
                 if(post.driver != undefined && post.driver != "")
                 {
                     output = Analyze(post.driver)
-                    await insertItemDB("NMBM_drivers",{}, output)
+                    await insertItemDB("NMBM_drivers", output)
                     res.status(201).json(output);
                 }
                 else
@@ -600,57 +619,57 @@ async function PostRouting(req, res, next)
             break
         }
         case ("get users"):
+        {
+
+            var successful = false
+
+            if(post.user)
             {
+                userEntry = GetUserEntry(post.user)
 
-                var successful = false
-
-                if(post.user)
+                if(userEntry.admin)
                 {
-                    userEntry = GetUserEntry(post.user)
+                    var usergroup = queryData.Users.filter((value) =>   {
 
-                    if(userEntry.admin)
-                    {
-                        var usergroup = queryData.Users.filter((value) =>   {
-
-                                                                                var foundone = false
-                                                                                if(userEntry.superuser || (!value.superuser && userEntry.admin && (value.admin || value.developer)) || (!value.admin && !value.developer && !value.superuser))
+                                                                            var foundone = false
+                                                                            if(userEntry.superuser || (!value.superuser && userEntry.admin && (value.admin || value.developer)) || (!value.admin && !value.developer && !value.superuser))
+                                                                            {
+                                                                                for(var userSites in value.pages)
                                                                                 {
-                                                                                    for(var userSites in value.pages)
+                                                                                    
+
+                                                                                    for(var referenceSites in userEntry.pages)
                                                                                     {
-                                                                                        
-    
-                                                                                        for(var referenceSites in userEntry.pages)
+                                                                                        if(userSites == referenceSites)
                                                                                         {
-                                                                                            if(userSites == referenceSites)
-                                                                                            {
-                                                                                                foundone = true
-                                                                                                break 
-                                                                                            }
+                                                                                            foundone = true
+                                                                                            break 
                                                                                         }
                                                                                     }
                                                                                 }
-                                                                                
-                                                                                return foundone
-                                                                            })
+                                                                            }
+                                                                            
+                                                                            return foundone
+                                                                        })
 
-                        var CopyOfUserGroup = JSON.parse(JSON.stringify(usergroup))
+                    var CopyOfUserGroup = JSON.parse(JSON.stringify(usergroup))
 
-                        for(var useritem of CopyOfUserGroup)
-                        {
-                            delete useritem.password
-                            delete useritem._id
-                        }
-
-                        res.status(200).json(CopyOfUserGroup)
-                        successful = true
+                    for(var useritem of CopyOfUserGroup)
+                    {
+                        delete useritem.password
+                        delete useritem._id
                     }
+
+                    res.status(200).json(CopyOfUserGroup)
+                    successful = true
                 }
-
-                if(!successful)
-                    BadResponse(res)
-
-                break
             }
+
+            if(!successful)
+                BadResponse(res)
+
+            break
+        }
         case ("create user"):
         {
             var successful = false
@@ -832,7 +851,10 @@ async function PostRouting(req, res, next)
             }
 
             if(!successful)
+            {
                 BadResponse(res)
+                console.log("Failed To Change Password For User: " + post.user)
+            }
             else
                 res.status(200).json("Success")
 
@@ -1138,19 +1160,75 @@ function GetDeveloperTags(input)
     return output;
 }
 
+function GetCloudWorksTags(drivers)
+{
+    var output = {}
+
+    for(var i = 0; i < drivers.length; i++)
+    {
+        if(drivers[i].SiteName != undefined)
+        {
+            output[drivers[i].SiteName] = []
+            if(drivers[i].SiteName != undefined)
+            {
+
+                for(var x = 0; x < drivers[i].SiteData.Tags.length; x++)
+                {
+                    if(drivers[i].SiteData.Tags[x].TagName != "" && drivers[i].SiteData.Tags[x].TagName != undefined)
+                    {
+                        output[drivers[i].SiteName].push(drivers[i].SiteData.Tags[x].TagName)
+                    }
+
+                    if(drivers[i].SiteData.Tags[x].RateName != "" && drivers[i].SiteData.Tags[x].RateName != undefined)
+                    {
+                        output[drivers[i].SiteName].push(drivers[i].SiteData.Tags[x].RateName)
+                    }
+                }
+            }
+        }
+    }
+
+    for(var x in output)
+    {
+        output[x].push("battery_status")
+        output[x].push("wakeupperiod")
+    }
+
+    return output
+}
+
 function SetTags(variableData, databaseData)
 {
     for(var driverName in variableData)
     {
         for(var i = 0 ; i < databaseData.length; i++)
         {
-            if(databaseData[i].driverName == driverName)
+            if(databaseData[i].driverName == driverName || databaseData[i].SiteName == driverName)
             {
                 for(var variableName in variableData[driverName])
                 {
                     if(databaseData[i].CurrentValues[variableName] != undefined)
                     {
                         variableData[driverName][variableName] = databaseData[i].CurrentValues[variableName]
+                        
+                        if(databaseData[i].dataArray != undefined)
+                        {
+                            for(var item of databaseData[i].dataArray)
+                            {
+                                if(item.tagName == variableName)
+                                {
+                                    if(item.descriptions != undefined)
+                                    {
+                                        if(variableData.lists == undefined)
+                                        {
+                                            variableData.lists = {}
+                                        }
+                                        variableData.lists[item.tagName] = item.descriptions
+                                    }
+                                    break;
+                                }
+                            }
+                        }
                     }
                 }
             }

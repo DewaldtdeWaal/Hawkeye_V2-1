@@ -49,6 +49,11 @@ import { CommunicationService } from './communication.service';
 import { DropDownDirective } from './Controls/dropdown.directive';
 import { SvgDrawingComponent } from './Pages/svg-drawing/svg-drawing.component';
 import { UserSettingsComponent } from './Pages/user-settings/user-settings.component';
+import { HeirarchyEditor } from './heirarchy-editor.service';
+import { MarshalComponent } from './Pages/dynamic-site-page/Sub Components/marshal/marshal.component';
+import { MarshalCreationComponent } from './Creation Components/marshal-creation/marshal-creation.component';
+import { StringlistComponent } from './Pages/dynamic-site-page/Sub Components/stringlist/stringlist.component';
+import { StringlistCreationComponent } from './Creation Components/stringlist-creation/stringlist-creation.component';
 
 @NgModule({
   declarations: [
@@ -90,7 +95,11 @@ import { UserSettingsComponent } from './Pages/user-settings/user-settings.compo
     UserManagementComponent,
     DropDownDirective,
     SvgDrawingComponent,
-    UserSettingsComponent
+    UserSettingsComponent,
+    MarshalComponent,
+    MarshalCreationComponent,
+    StringlistComponent,
+    StringlistCreationComponent
     
 
   ],
@@ -102,7 +111,7 @@ import { UserSettingsComponent } from './Pages/user-settings/user-settings.compo
     ReactiveFormsModule,
     NgxEchartsModule
   ],
-  providers: [UserAuthenticationService, CommunicationService, RouteGuard, SiteStorageService,{provide: HTTP_INTERCEPTORS,useClass: HeaderInterceptor, multi:true},provideEcharts()],
+  providers: [UserAuthenticationService, HeirarchyEditor,CommunicationService, RouteGuard, SiteStorageService,{provide: HTTP_INTERCEPTORS,useClass: HeaderInterceptor, multi:true},provideEcharts()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -11,6 +11,7 @@ export class CreationPageComponent implements OnChanges {
   @Input() disabled:any = false;
   @Input() customers:any = []
   @Output() pagechanged = new EventEmitter<any>();
+  @Input() heirarchystructure:any = {}
   component:any = "page"
   componentList:any = []
 

@@ -20,6 +20,7 @@ disablecreationpage:any = false;
 @Input() developertags:any = null;
 @Input() structure:any = null;
 @Input() customers:any = []
+@Input() heirarchystructure:any = {}
 @Output() changepage = new EventEmitter<any>();
 
 

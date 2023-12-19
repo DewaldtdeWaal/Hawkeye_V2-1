@@ -29,6 +29,8 @@ export class ChartCreationComponent implements AfterContentInit {
   leftname:any = ""
   rightname:any = ""
 
+  ApplyFRCalculations:any = false;
+
   ngAfterContentInit(): void {
 
 
@@ -129,6 +131,7 @@ export class ChartCreationComponent implements AfterContentInit {
       newItem.name = this.alias
       newItem.yAxisIndex = this.currentitemura == true ? 1:0
       newItem.data = []
+      newItem.ApplyFlowRateCalculations = this.ApplyFRCalculations
 
       if(exists)
       {
@@ -210,6 +213,14 @@ export class ChartCreationComponent implements AfterContentInit {
          this.selectedtype = this.structure.trendinformation[i].type
          this.alias = this.structure.trendinformation[i].name
          this.currentitemura = this.structure.trendinformation[i].yAxisIndex
+         if(this.structure.trendinformation[i].ApplyFlowRateCalculations != undefined)
+         {
+            this.ApplyFRCalculations = this.structure.trendinformation[i].ApplyFlowRateCalculations
+         }
+         else
+         {
+            this.ApplyFRCalculations = false
+         }
         break;
       }
     }

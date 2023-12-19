@@ -23,7 +23,7 @@
         </ng-container>
         <div class="editor-container">
             <ng-container *ngIf="component == 'page' && !disabled">
-                <app-creation-page-root-editor (pagechanged)="PageChanged()" [structure]="structure" [customers]="customers" (updateroot)="updateroot($event)"></app-creation-page-root-editor>
+                <app-creation-page-root-editor [heirarchystructure]="heirarchystructure" (pagechanged)="PageChanged()" [structure]="structure" [customers]="customers" (updateroot)="updateroot($event)"></app-creation-page-root-editor>
             </ng-container>
             <ng-container *ngIf="component != 'page' && !disabled">
                 <app-creation-page-container-editor (pagechanged)="PageChanged()"  [structure]="structure" [containerdescription]="component" [developertags]="developertags"></app-creation-page-container-editor>

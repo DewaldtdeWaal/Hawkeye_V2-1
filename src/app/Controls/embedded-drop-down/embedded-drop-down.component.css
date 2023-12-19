@@ -1,3 +1,8 @@
+.main-container
+{
+    width:100%;
+    height:100%;
+}
 .clickable
 {
     cursor:pointer;
@@ -8,9 +13,37 @@
 {
     display:flex;
     flex-flow: row nowrap;
-    place-content: center center;
-    place-items: center center;
-    height:30px
+}
+
+.parent
+{
+    width: 100%;
+    background-color: darkgray;
+    color:black;
+    height:30px;
+    display:flex;
+    flex-flow:column nowrap;
+    justify-content: center;
+}
+
+.child
+{
+    width:100%;
+    height:30px;
+    background-color:rgb(46, 46, 77);
+    display:flex;
+    flex-flow:column nowrap;
+    justify-content: center;
+}
+
+.child-check
+{
+    background-color:rgb(46, 46, 77);
+}
+
+.child-text
+{
+    color:white;
 }
 
 /* .main-container

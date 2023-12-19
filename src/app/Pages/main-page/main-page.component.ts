@@ -7,7 +7,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class MainPageComponent {
   @Input() links:any=[];
-  @Output() pagechanged = new EventEmitter<{newpagename:"",sitename:""}>;
+  @Input() heirarchy:any = {}
+  @Output() pagechanged = new EventEmitter<any>();
   // {pagetext: "Greenbushes",pagelink:"/page"}
 
   constructor()
@@ -28,5 +29,11 @@ export class MainPageComponent {
         }
       }
     }
+  }
+
+  SetPage(pagename)
+  {
+    var link = {pagename:pagename, navpage:"site"}
+    this.pagechanged.emit(link)
   }
 }

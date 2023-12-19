@@ -72,6 +72,11 @@
             <app-reservoir-creation (pagechanged)="PageChanged()" (updatechild)="UpdateChild($event)" [structure]="selectedChild" [developertags]="developertags"></app-reservoir-creation>
         </ng-container>
     </div>
+    <div class="component-generator">
+        <ng-container *ngIf="(selectedtype == 'marshal' || selectedtype == 'stringlist') && editchild == false">
+            <app-stringlist-creation (pagechanged)="PageChanged()" (updatechild)="UpdateChild($event)" [structure]="selectedChild" [developertags]="developertags" [type]="selectedtype"></app-stringlist-creation>
+        </ng-container>
+    </div>
 </ng-container>
 
 <div class="component-generator">
@@ -107,6 +112,11 @@
 <div class="component-generator">
     <ng-container *ngIf="selectedtype == 'reservoir' && editchild == true">
         <app-reservoir-creation (pagechanged)="PageChanged()" (updatechild)="UpdateChild($event)" [structure]="selectedChild" [developertags]="developertags"></app-reservoir-creation>
+    </ng-container>
+</div>
+<div class="component-generator">
+    <ng-container *ngIf="(selectedtype == 'marshal' || selectedtype == 'stringlist') && editchild == true">
+        <app-stringlist-creation (pagechanged)="PageChanged()" (updatechild)="UpdateChild($event)" [structure]="selectedChild" [developertags]="developertags" [type]="selectedtype"></app-stringlist-creation>
     </ng-container>
 </div>
 

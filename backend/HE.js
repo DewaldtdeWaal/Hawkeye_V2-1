@@ -32,7 +32,7 @@ async function GetMongoData()
 
 
             console.log("Reading Database!")
-            var mappings = {Users:"HawkEyeUsers",UserPages:"HawkEyePages",Drivers:"NMBM_drivers"}
+            var mappings = {Users:"HawkEyeUsers",UserPages:"HawkEyePages",Drivers:"NMBM_drivers",CloudWorks:"NMBM_CLOUDWORKS_Drivers"}
             for(var x in mappings)
             {
                 express.queryData[x] = await express.getFromDB(mappings[x],{},{})

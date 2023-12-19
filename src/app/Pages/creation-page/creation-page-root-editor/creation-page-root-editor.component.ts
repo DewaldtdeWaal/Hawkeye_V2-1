@@ -1,4 +1,5 @@
 import { Component, Output, EventEmitter, ViewChild, Input, AfterContentInit } from '@angular/core';
+import { HeirarchyEditor } from 'src/app/heirarchy-editor.service';
 
 @Component({
   selector: 'app-creation-page-root-editor',
@@ -12,12 +13,19 @@ export class CreationPageRootEditorComponent implements AfterContentInit {
 @ViewChild('pagebox') pagebox:any;
 @ViewChild('containerbox') containerbox:any;
 @Input() structure:any;
+@Input() heirarchystructure:any = {}
 heirarchyitem:any = ""
 @Input() customers = []
+nextitems:any = []
 
 ngAfterContentInit(): void {
   // for(var x of this.structure.page)
   
+}
+
+constructor(private heirarchy: HeirarchyEditor)
+{
+
 }
 
 GetCustomer()
@@ -57,14 +65,54 @@ UploadPage()
   this.uploadpage.emit({uploadpage:true})
 }
 
+GetHeirarchyItems()
+{
+  this.PageHeirarchyExists()
+  
+  this.nextitems = []
+  //Here
+  if(this.structure != undefined && this.structure.pageheirarchy != undefined)
+  {
+    var pgheir = JSON.parse(JSON.stringify(this.structure.pageheirarchy))
+    pgheir.splice(0,0,this.GetCustomer())
+  
+    this.nextitems = this.heirarchy.GetLevelObjects(this.heirarchystructure,pgheir,0)
+  }
+}
+
 HeirarchyItemSelected(item)
 {
   this.heirarchyitem = item
 }
 
+SelectExistingHeirarchyItem(name)
+{
+  this.pagechanged.emit();
+
+  if(name && name != "")
+  {
+    if(this.structure.pageheirarchy == undefined)
+    {
+      this.structure.pageheirarchy = []
+    }
+    this.structure.pageheirarchy.push(name)
+  }
+}
+
+PageHeirarchyExists()
+{
+  if(this.structure.pageheirarchy == undefined)
+  {
+    this.structure.pageheirarchy = []
+  }
+}
+
 HeirarchyAddItem()
 {
   this.pagechanged.emit();
+
+  this.PageHeirarchyExists()
+
   if(this.structure.pageheirarchy.filter((value)=>
   {
     return value == this.heirarchyitem 
@@ -72,6 +120,7 @@ HeirarchyAddItem()
   {
     this.structure.pageheirarchy.push(this.heirarchyitem)
   }
+  this.heirarchyitem = ""
 }
 
 HeirarchyRemoveItem()
@@ -89,8 +138,10 @@ HeirarchyRemoveItem()
 
   if(index > -1)
   {
-    this.structure.pageheirarchy.splice(index,1)
+    var removecount = this.structure.pageheirarchy.length - (index)
+    this.structure.pageheirarchy.splice(index, removecount)
   }
+  this.heirarchyitem = ""
 }
 
 CustomerItemSelected(item)

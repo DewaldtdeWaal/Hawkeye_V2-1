@@ -24,13 +24,13 @@
     </div>
     <div class="page-rendering">
         <ng-container *ngIf="currentpage == 'mainpage' && this.links.length > 0">
-            <app-main-page [links]="this.links" (pagechanged)="changepage($event)"></app-main-page>
+            <app-main-page [heirarchy]="pageheirarchy" [links]="this.links" (pagechanged)="changepage($event)"></app-main-page>
         </ng-container >
         <ng-container *ngIf="currentpage == 'site'">
             <app-dynamic-site-page [structure]="sitestructure"></app-dynamic-site-page>
         </ng-container >
         <ng-container  *ngIf="currentpage == 'development'">
-            <app-developer-page (discardchanges)="DiscardDeveloperChanges()" (savechanges)="SaveDeveloperChanges($event)" (pagechanged)="PageChanged()" [customers]="userdata.customers" [structure]="copyofuserdata" ></app-developer-page>
+            <app-developer-page [heirarchystructure]="pageheirarchy" (discardchanges)="DiscardDeveloperChanges()" (savechanges)="SaveDeveloperChanges($event)" (pagechanged)="PageChanged()" [customers]="userdata.customers" [structure]="copyofuserdata" ></app-developer-page>
         </ng-container> 
         <ng-container  *ngIf="currentpage == 'drivercreation'">
             <app-driver-creation [driverdata]="userdata.driverdata"></app-driver-creation>

@@ -7,7 +7,10 @@ import { AfterContentInit, Component, EventEmitter, Input, OnChanges, Output, Si
 })
 export class EmbeddedDropDownComponent implements AfterContentInit, OnChanges {
   @Input() structure:any = null
+  @Input() allowchildcheckbox:any = false
+  @Input() allowchildren:any = true
   @Output() valuechanged = new EventEmitter<any>()
+  @Output() childclicked = new EventEmitter<any>()
   display:any = false
   names:any = []
   items:any = []
@@ -42,6 +45,11 @@ export class EmbeddedDropDownComponent implements AfterContentInit, OnChanges {
       if(item != 'items')
         this.items.push(item)
     }
+  }
+
+  ChildClicked(item)
+  {
+    this.childclicked.emit(item)
   }
 
   ValueChanged()

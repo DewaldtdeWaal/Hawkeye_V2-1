@@ -4,7 +4,8 @@
             <div class="link-list-head">
                 Pages</div>
             <div class="link-list">
-                <div *ngFor="let x of links" class="list-item-container">
+                <app-embedded-drop-down [allowchildcheckbox]="false" (childclicked)="SetPage($event)" [structure]="heirarchy"></app-embedded-drop-down>
+                <div *ngFor="let x of links.sort()" class="list-item-container">
                     <a class="list-item" (click)="linkClick($event)">{{x.pagename}}</a>
                 </div>
             </div>

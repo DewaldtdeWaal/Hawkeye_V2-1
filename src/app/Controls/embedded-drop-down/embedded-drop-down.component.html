@@ -1,18 +1,22 @@
 <div class="main-container">
-    <div *ngFor="let node of names">
-        <div class="myrow">
-            <div class="clickable" (click)="structure[node].showchildren = !structure[node].showchildren">{{node}} </div>
-            <div *ngIf="!structure[node].showchildren == true">></div>
-            <div *ngIf="structure[node].showchildren == true">^</div>
-        </div>
-        <app-embedded-drop-down *ngIf="structure[node].showchildren" (valuechanged)="ValueChanged()" [structure]="structure[node]"></app-embedded-drop-down>
-    </div>
-    <div *ngIf="structure.items != undefined && structure.showchildren">
-        <div *ngFor="let item of items">
+    <div *ngIf="structure.items != undefined && structure.showchildren && allowchildren">
+        <div *ngFor="let item of items.sort()">
             <div class="myrow">
-                <input (input)="ValueChanged()" [(ngModel)]="structure.items[item].enable" type="checkbox">
-                <div class="clickable" (click)="structure.items[item].enable = !structure.items[item].enable; ValueChanged()">{{item}}</div>
+                <div class="child-check" *ngIf="allowchildcheckbox == true">
+                    <input  (input)="ValueChanged()" [(ngModel)]="structure.items[item].enable" type="checkbox">
+                </div>
+                <div class="child">
+                    <div class="clickable child-text" (click)="  
+                    structure.items[item].enable = !structure.items[item].enable; 
+                    ValueChanged(); ChildClicked(item)">{{item}}</div>
+                </div>
             </div>
         </div>
+    </div>
+    <div *ngFor="let node of names.sort()">
+        <div class="myrow parent">
+                <div class="clickable" (click)="structure[node].showchildren = !structure[node].showchildren">{{node}} </div>
+        </div>
+        <app-embedded-drop-down [allowchildcheckbox]="allowchildcheckbox" [allowchildren]="allowchildren" *ngIf="structure[node].showchildren" (valuechanged)="ValueChanged()" (childclicked)="ChildClicked($event)" [structure]="structure[node]"></app-embedded-drop-down>
     </div>
 </div>

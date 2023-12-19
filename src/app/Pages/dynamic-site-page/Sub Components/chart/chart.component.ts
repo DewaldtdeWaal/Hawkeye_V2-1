@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { AfterContentInit, Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
-import {  EChartsOption } from 'echarts';
+import {  EChartsOption, registerPostUpdate } from 'echarts';
 import { CommunicationService } from 'src/app/communication.service';
 
 @Component({
@@ -101,9 +101,35 @@ export class ChartComponent implements OnChanges,AfterContentInit {
             if(respitem.site == item.sitename)
             {
               item.data = []
+              var lastvalue:any = undefined
+              var currentvalue:any = undefined
               for(var i = 0; i < respitem.data.length; i++)
               {
-                item.data.push([respitem.data[i].date,respitem.data[i][item.tagname]])
+                if(item.ApplyFlowRateCalculations)
+                {
+                  if(lastvalue != undefined)
+                  {
+                    if(new Date(respitem.data[i].date).getHours() == 0)
+                    {
+                      currentvalue = respitem.data[i][item.tagname]
+                      item.data.push([respitem.data[i].date,currentvalue - lastvalue])
+                      lastvalue = currentvalue
+                    }
+                  }
+                  else
+                  {
+                    if(new Date(respitem.data[i].date).getHours() == 0)
+                    {
+                      lastvalue = respitem.data[i][item.tagname]
+                      //item.data.push([respitem.data[i].date, currentvalue])
+                    }
+                  }
+                }
+                else
+                {
+                  item.data.push([respitem.data[i].date,respitem.data[i][item.tagname]])
+                }
+                
               }
               break;
             }

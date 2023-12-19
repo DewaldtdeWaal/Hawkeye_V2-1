@@ -14,6 +14,6 @@
         <button (click)="DeletePage()">Delete Page</button>
     </ng-container>
     <div class="creation-page-container">
-        <app-creation-page [disabled]="disablecreationpage" (pagechanged)="PageChanged()" [structure]="currentstructure" [customers]="customers" [developertags]="developertags"></app-creation-page>
+        <app-creation-page [heirarchystructure]="heirarchystructure" [disabled]="disablecreationpage" (pagechanged)="PageChanged()" [structure]="currentstructure" [customers]="customers" [developertags]="developertags"></app-creation-page>
     </div>
 </div>

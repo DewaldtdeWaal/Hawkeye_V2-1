@@ -6,24 +6,27 @@
             </div>
         </div>
         <div class="component-container" *ngFor="let component of structure.components;let i = index">
-            <ng-container *ngIf="component.componentType === 'borehole_pump'">
+            <ng-container *ngIf="component.componentType == 'borehole_pump'">
                 <app-borehole-pump [structure]="structure.components[i]"></app-borehole-pump>
             </ng-container>
-            <ng-container *ngIf="component.componentType === 'boolean_scan'">
+            <ng-container *ngIf="component.componentType == 'boolean_scan'">
                 <app-boolean-scan [structure]="structure.components[i]"></app-boolean-scan>
             </ng-container>
-            <ng-container *ngIf="component.componentType === 'real_scan'">
+            <ng-container *ngIf="component.componentType == 'real_scan'">
                 <app-real-scan [structure]="structure.components[i]"></app-real-scan>
             </ng-container>
-            <ng-container *ngIf="component.componentType === 'level_display'">
+            <ng-container *ngIf="component.componentType == 'level_display'">
                 <!-- <app-level-display [structure]="structure.components[i]"></app-level-display> -->
                 <app-reservoir [level]="structure.components[i].value"></app-reservoir>
             </ng-container>
-            <ng-container *ngIf="component.componentType === 'string_scan'">
+            <ng-container *ngIf="component.componentType == 'string_scan'">
                 <app-string-scan [structure]="structure.components[i]"></app-string-scan>
             </ng-container>
-            <ng-container *ngIf="component.componentType === 'chart'">
+            <ng-container *ngIf="component.componentType == 'chart'">
                 <app-chart style="width:100%" (setparentwidth)="SetWidth($event)" [structure]="structure.components[i]"></app-chart>
+            </ng-container>
+            <ng-container *ngIf="component.componentType == 'marshal' || component.componentType == 'stringlist'">
+                <app-stringlist [structure]="structure.components[i]"></app-stringlist>
             </ng-container>
         </div>
     </div>

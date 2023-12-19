@@ -1,11 +1,14 @@
 <div class="flex-column medium-small-column">
-    <p>Current Password:</p>
-    <input [(ngModel)]="oldpassword" type="password" />
-    <p>New Password:</p>
-    <input [(ngModel)]="newpassword" type="password" />
-    <p>Confirm Password:</p>
-    <input [(ngModel)]="confirmpassword" type="password" />
-    <div class="flex-column small-large-column">
+    <form #passwords="ngForm">
+        <p>Current Password:</p>
+        <input [(ngModel)]="oldpassword" type="password" name="oldpassword" minlength="8" required/>
+        <p>New Password:</p>
+        <input [(ngModel)]="newpassword" type="password" name="newpassword" minlength="8" required/>
+        <p>Confirm Password:</p>
+        <input [(ngModel)]="confirmpassword" type="password" name="confirmpassword" minlength="8" required/>
+    </form>
+    
+    <div *ngIf="passwords.valid" class="flex-column small-large-column">
         <button (click)="SetNewPassword()" >Accept</button>
     </div>
 </div>

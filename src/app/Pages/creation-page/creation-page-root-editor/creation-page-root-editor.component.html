@@ -6,6 +6,7 @@
         <app-new-drop-down  [disabled]="structure.dummy != undefined" [items]="customers" (itemselected)="CustomerItemSelected($event)" [emptyoption]="false" [selector]="GetCustomer()" ></app-new-drop-down>
     </div>
     <p>Heirarchy:</p>
+    <app-new-drop-down [disabled]="structure.dummy != undefined" (mouseenter)="GetHeirarchyItems()" [items]="nextitems" (itemselected)="SelectExistingHeirarchyItem($event)"></app-new-drop-down>
     <input  [disabled]="structure.dummy != undefined" [(ngModel)]="heirarchyitem" type="text">
     <button (click)="HeirarchyAddItem()" [disabled]="structure.dummy != undefined" >Add</button><button (click)="HeirarchyRemoveItem()" [disabled]="structure.dummy != undefined" >Remove</button>
     <div class="list-box">

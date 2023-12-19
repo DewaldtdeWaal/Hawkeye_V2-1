@@ -30,15 +30,15 @@ export class BooleanScanComponent implements AfterContentInit, OnChanges {
     var valy:any = this.structure.value
     if(valy == 0)
     {
-      return this.structure.description + " = " + this.structure.falseResponse
+      return this.structure.description + ": " + this.structure.falseResponse
     }
     else if(valy == 1)
     {
-      return this.structure.description + " = " + this.structure.trueResponse
+      return this.structure.description + ": " + this.structure.trueResponse
     }
     else
     {
-      return this.structure.description + " = "
+      return this.structure.description + ": "
     }
   }
 

@@ -29,7 +29,8 @@ export class CreationPageContainerEditorComponent implements AfterContentInit, O
   "string_scan",
   "borehole_pump",
   "reservoir",
-  "chart"]
+  "chart",
+  "stringlist"]
 
   ngAfterContentInit(): void 
   {

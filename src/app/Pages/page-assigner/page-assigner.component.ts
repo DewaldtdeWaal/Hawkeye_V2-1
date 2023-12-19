@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { AfterContentInit, Component, Input } from '@angular/core';
 import { CommunicationService } from 'src/app/communication.service';
+import { HeirarchyEditor } from 'src/app/heirarchy-editor.service';
 import { UserAuthenticationService } from 'src/app/user-authentication.service';
 
 @Component({
@@ -22,7 +23,7 @@ export class PageAssignerComponent implements AfterContentInit {
   disableuserchange:any = false
   saveable:any = false
 
-  constructor(private http:HttpClient, private userauth: UserAuthenticationService, private commservice:CommunicationService)
+  constructor(private heirarchyeditor:HeirarchyEditor,private http:HttpClient, private userauth: UserAuthenticationService, private commservice:CommunicationService)
   {
     
   }
@@ -33,33 +34,6 @@ export class PageAssignerComponent implements AfterContentInit {
     this.SetStructure()
 
     this.displayheir = this.heir
-  }
-
-
-  SetupNavigationTree(currentNode,page,itemArray,itemIndex)
-  {
-    if(itemArray.length > itemIndex)
-    {
-      if(currentNode[itemArray[itemIndex]] == undefined)
-      {
-        currentNode[itemArray[itemIndex]] = {}
-      }
-      var newitemIndex = itemIndex + 1
-      currentNode.showchildren = false
-      this.SetupNavigationTree(currentNode[itemArray[itemIndex]],page,itemArray,newitemIndex)
-    }
-    else
-    {
-      currentNode.showchildren = false
-      if(currentNode.items == undefined)
-      {
-        currentNode.items = {}
-      }
-      currentNode.items[page.pageName] = {}
-      currentNode.items[page.pageName].enable = false
-      currentNode.items[page.pageName].page = page
-
-    }
   }
 
   async GetUserData()
@@ -78,17 +52,7 @@ export class PageAssignerComponent implements AfterContentInit {
 
   SetStructure()
   {
-    this.displayheir = null
-    this.heir = {}
-
-    for(var i = 0; i < this.pages.length; i++)
-    {
-      var itemArray = []
-      if(this.pages[i].pageheirarchy)
-        itemArray = Array.from(this.pages[i].pageheirarchy)
-      itemArray.splice(0,0,this.pages[i].customer)
-      this.SetupNavigationTree(this.heir,this.pages[i],itemArray,0)
-    }
+    this.heir = this.heirarchyeditor.GetStructure(this.pages)
   }
 
   UpdateSiteSelections(updateItemName)
@@ -101,8 +65,7 @@ export class PageAssignerComponent implements AfterContentInit {
         
         this.SetStructure()
 
-
-        this.SetNavigationTree(this.heir,user.pages)
+        this.heirarchyeditor.SelectNavigationChildren(this.heir,user.pages)
         var toremove:any = []
         for(var site in this.heir)
         {
@@ -132,76 +95,10 @@ export class PageAssignerComponent implements AfterContentInit {
     }
   }
 
-  SetNavigationTree(structure,pages)
-  {
-    for(var object in structure)
-    {
-      if(object != 'items' && object != "showchildren")
-        this.SetNavigationTree(structure[object],pages)
-    }
-    if(structure.items != undefined)
-    {
-      for(var pageItem in structure.items)
-      {
-        for(var userCustomer in pages)
-        {
-          if(userCustomer == structure.items[pageItem].page.customer)
-          {
-            var idmatch = false
-
-            for(var pageid of pages[userCustomer])
-            {
-              if(pageid == structure.items[pageItem].page.id)
-              {
-                idmatch = true
-              }
-            }
-
-            if(idmatch)
-            {
-              structure.items[pageItem].enable = true
-              break;
-            }
-            else
-            {
-              structure.items[pageItem].enable = false
-            }
-            
-          }
-        }
-      }
-    }
-  }
-
-  BuildUserPages(structure,pages)
-  {
-    for(var object in structure)
-    {
-      if(object != 'items' && object != "showchildren")
-        this.BuildUserPages(structure[object],pages)
-    }
-    if(structure.items != undefined)
-    {
-      for(var pageItem in structure.items)
-      {
-        if(structure.items[pageItem].enable)
-        {
-          var customer = structure.items[pageItem].page.customer
-          if(pages[customer] == undefined)
-          {
-            pages[customer] = []
-          }
-
-          pages[customer].push(structure.items[pageItem].page.id)
-        }
-      }
-    }
-  }
-
   UpdateUser()
   {
     var out = {}
-    this.BuildUserPages(this.displayheir,out)
+     this.heirarchyeditor.BuildUserPages(this.displayheir,out)
 
     for(var cust of this.customers)
     {
@@ -234,9 +131,19 @@ export class PageAssignerComponent implements AfterContentInit {
           }
         }
 
-        this.saveable = true
-        this.disableuserchange = false
-        this.currentuser = ""
+        var userList = []
+        userList.push(user)
+
+        const message = {requesttype: "set page assignments", user:this.userauth.email ,assignments:userList}
+        this.http.post<any>("http://" + this.commservice.ipaddressorhostname + ":3004/api/posts",message).subscribe((res) => 
+        {
+          this.disableuserchange = false
+          this.currentuser = ""
+        })
+
+
+        // this.saveable = true
+        
         break;
       }
     }
@@ -252,13 +159,14 @@ export class PageAssignerComponent implements AfterContentInit {
     }
   }
   
-  SaveUsers()
-  {
-    const message = {requesttype: "set page assignments", user:this.userauth.email ,assignments:this.pageassignments}
-    this.http.post<any>("http://" + this.commservice.ipaddressorhostname + ":3004/api/posts",message).subscribe((res) => 
-    {
-      //add code to tell parent that page was saved and we can now navigate again
-    })
-    this.saveable = false
-  }
+  // SaveUsers()
+  // {
+  //   const message = {requesttype: "set page assignments", user:this.userauth.email ,assignments:this.pageassignments}
+  //   this.http.post<any>("http://" + this.commservice.ipaddressorhostname + ":3004/api/posts",message).subscribe((res) => 
+  //   {
+  //     //add code to tell parent that page was saved and we can now navigate again
+  //   })
+  //   this.saveable = false
+  // }
+
 }
