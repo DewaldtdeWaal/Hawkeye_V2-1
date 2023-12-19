@@ -1,0 +1,11 @@
+<div class="flex-column medium-small-column">
+    <p>Current Password:</p>
+    <input [(ngModel)]="oldpassword" type="password" />
+    <p>New Password:</p>
+    <input [(ngModel)]="newpassword" type="password" />
+    <p>Confirm Password:</p>
+    <input [(ngModel)]="confirmpassword" type="password" />
+    <div class="flex-column small-large-column">
+        <button (click)="SetNewPassword()" >Accept</button>
+    </div>
+</div>

@@ -797,6 +797,47 @@ async function PostRouting(req, res, next)
 
             break
         }
+        case("set user password"):
+        {
+            var successful = false
+
+            if(post.user != undefined && post.newpassword != undefined && post.oldpassword != undefined)
+            {
+                console.log("Change Password Requested For: " + post.user)
+
+                for(var i =0; i < queryData.Users.length;i++ )
+                {
+                    
+                    if(queryData.Users[i].email == post.user)
+                    {
+                        if(await bcrypt.compare(post.oldpassword,queryData.Users[i].password))
+                    {
+                        var hashedpw = await bcrypt.hash(post.newpassword,10)
+
+                        queryData.Users[i].password = hashedpw
+
+                        if(queryData.Users[i]._id)
+                            delete queryData.Users[i]["_id"]
+
+                        await updateItemDB(usercollection,{email:queryData.Users[i].email},{$set:queryData.Users[i]})
+
+                        console.log("Changed Password For User: " + post.user)
+
+                        successful = true
+                    }
+                    }
+                }
+
+                
+            }
+
+            if(!successful)
+                BadResponse(res)
+            else
+                res.status(200).json("Success")
+
+            break
+        }
         default:
         {
             BadResponse(res)

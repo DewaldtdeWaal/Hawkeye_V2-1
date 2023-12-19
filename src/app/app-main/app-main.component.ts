@@ -122,7 +122,7 @@ export class AppMainComponent implements OnDestroy, AfterContentInit {
         
         this.links.push({pagename:"SVG Drawing", navpage:"svgdrawing"})
       }
-      
+      this.links.push({pagename:"Settings", navpage:"usersettings"})
   }
 
   changepage(event:any)

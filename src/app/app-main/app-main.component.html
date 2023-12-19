@@ -44,6 +44,9 @@
         <ng-container  *ngIf="currentpage == 'svgdrawing'">
             <app-svg-drawing></app-svg-drawing>
         </ng-container>
+        <ng-container  *ngIf="currentpage == 'usersettings'">
+            <app-user-settings [userdata]="userdata"></app-user-settings>
+        </ng-container>
     </div>
 </div>
 

@@ -48,6 +48,7 @@ import { UserManagementComponent } from './Pages/user-management/user-management
 import { CommunicationService } from './communication.service';
 import { DropDownDirective } from './Controls/dropdown.directive';
 import { SvgDrawingComponent } from './Pages/svg-drawing/svg-drawing.component';
+import { UserSettingsComponent } from './Pages/user-settings/user-settings.component';
 
 @NgModule({
   declarations: [
@@ -88,7 +89,8 @@ import { SvgDrawingComponent } from './Pages/svg-drawing/svg-drawing.component';
     EmbeddedDropDownComponent,
     UserManagementComponent,
     DropDownDirective,
-    SvgDrawingComponent
+    SvgDrawingComponent,
+    UserSettingsComponent
     
 
   ],
