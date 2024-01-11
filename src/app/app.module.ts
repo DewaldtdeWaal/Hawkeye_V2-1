@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { GoogleMapsModule} from "@angular/google-maps";
 
 import { AppComponent } from './app.component';
 import { ContainerComponent } from './Pages/dynamic-site-page/Sub Components/container/container.component';
@@ -54,6 +55,7 @@ import { MarshalComponent } from './Pages/dynamic-site-page/Sub Components/marsh
 import { MarshalCreationComponent } from './Creation Components/marshal-creation/marshal-creation.component';
 import { StringlistComponent } from './Pages/dynamic-site-page/Sub Components/stringlist/stringlist.component';
 import { StringlistCreationComponent } from './Creation Components/stringlist-creation/stringlist-creation.component';
+import { GMapComponent } from './Pages/main-page/g-map/g-map.component';
 
 @NgModule({
   declarations: [
@@ -99,8 +101,9 @@ import { StringlistCreationComponent } from './Creation Components/stringlist-cr
     MarshalComponent,
     MarshalCreationComponent,
     StringlistComponent,
-    StringlistCreationComponent
-    
+    StringlistCreationComponent,
+    GMapComponent
+
 
   ],
   imports: [
@@ -109,7 +112,8 @@ import { StringlistCreationComponent } from './Creation Components/stringlist-cr
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxEchartsModule
+    NgxEchartsModule,
+    GoogleMapsModule
   ],
   providers: [UserAuthenticationService, HeirarchyEditor,CommunicationService, RouteGuard, SiteStorageService,{provide: HTTP_INTERCEPTORS,useClass: HeaderInterceptor, multi:true},provideEcharts()],
   bootstrap: [AppComponent]
