@@ -1,7 +1,16 @@
 <p> </p>
-<google-map height="400px"
-            width="975px"
-            [center]="center"
-            [zoom]="zoom">
-</google-map>
-<p>g-map works!</p>
+
+    <google-map height="400px"
+                width="975px"
+                [center]="center"
+                [zoom]="zoom">
+    </google-map>
+    <p>g-map works!</p>
+
+    <div
+     *ngIf="userdata!=undefined" class="myrow">
+        <div
+        *ngFor = "let pages of userdata.pages; let i = index" class="mycol">
+        {{pages}}
+        </div>
+    </div>

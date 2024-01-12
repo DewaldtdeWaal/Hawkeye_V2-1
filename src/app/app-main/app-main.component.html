@@ -26,6 +26,9 @@
         <ng-container *ngIf="currentpage == 'mainpage' && this.links.length > 0">
             <app-main-page [heirarchy]="pageheirarchy" [links]="this.links" (pagechanged)="changepage($event)"></app-main-page>
         </ng-container >
+        <ng-container  *ngIf="currentpage == 'mainpage'">
+            <app-g-map [userdata]="userdata"></app-g-map>
+        </ng-container>
         <ng-container *ngIf="currentpage == 'site'">
             <app-dynamic-site-page [structure]="sitestructure"></app-dynamic-site-page>
         </ng-container >
@@ -47,6 +50,7 @@
         <ng-container  *ngIf="currentpage == 'usersettings'">
             <app-user-settings [userdata]="userdata"></app-user-settings>
         </ng-container>
+
     </div>
 </div>
 

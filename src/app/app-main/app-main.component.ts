@@ -35,6 +35,7 @@ export class AppMainComponent implements OnDestroy, AfterContentInit {
 
     //
     this.userdata = this.siteStorage.getStructure()
+    console.log(this.userdata)
     if(this.userdata)
     {
       this.pageheirarchy = this.heirarchyservice.GetStructure(this.userdata.pages)
@@ -44,6 +45,7 @@ export class AppMainComponent implements OnDestroy, AfterContentInit {
     else
     {
       this.GetUserData(this.http)
+      console.log(this.userdata)
     }
 
     this.tokenlistener = this.userauth.getAuthListener().subscribe((isauthenticated)=>

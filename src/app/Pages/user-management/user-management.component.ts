@@ -30,6 +30,7 @@ export class UserManagementComponent implements AfterContentInit {
   ngAfterContentInit(): void {
     this.GetUsers()
     this.GetCustomerObj()
+    console.log(this.userdata)
   }
 
   GetCustomerObj()
@@ -151,6 +152,7 @@ export class UserManagementComponent implements AfterContentInit {
     {
       this.http.post<any>("http://" + this.commservice.ipaddressorhostname + ":3004/api/posts",{requesttype:"create user",user:this.userauth.email,userdata:this.selecteduserObj}).subscribe((resp)=>
       {
+
         var found = false
         for(var i = 0; i < this.fetchedusers.length; i++)
         {
