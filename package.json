@@ -23,6 +23,7 @@
     "bootstrap": "^3.4.1",
     "echarts": "^5.4.3",
     "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.3.0",
     "ngx-echarts": "^17.1.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

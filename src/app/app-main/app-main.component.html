@@ -34,7 +34,7 @@
         </ng-container >
         <ng-container  *ngIf="currentpage == 'development'">
             <app-developer-page [heirarchystructure]="pageheirarchy" (discardchanges)="DiscardDeveloperChanges()" (savechanges)="SaveDeveloperChanges($event)" (pagechanged)="PageChanged()" [customers]="userdata.customers" [structure]="copyofuserdata" ></app-developer-page>
-        </ng-container> 
+        </ng-container>
         <ng-container  *ngIf="currentpage == 'drivercreation'">
             <app-driver-creation [driverdata]="userdata.driverdata"></app-driver-creation>
         </ng-container>

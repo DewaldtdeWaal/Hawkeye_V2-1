@@ -14,11 +14,12 @@ import { HeirarchyEditor } from '../heirarchy-editor.service';
 })
 export class AppMainComponent implements OnDestroy, AfterContentInit {
   userdata:any = {}
+  pages = []
   disablenavigation:any = false
   copyofuserdata:any = null
   sitestructure:any = null
   links:any = []
-  currentpage:any =  "mainpage" 
+  currentpage:any =  "mainpage"
   title:any = "Main Page"
   variableData:any = null
   fontsize:any = 15;
@@ -31,7 +32,7 @@ export class AppMainComponent implements OnDestroy, AfterContentInit {
   }
 
   ngAfterContentInit(): void {
-    
+
 
     //
     this.userdata = this.siteStorage.getStructure()
@@ -50,10 +51,10 @@ export class AppMainComponent implements OnDestroy, AfterContentInit {
 
     this.tokenlistener = this.userauth.getAuthListener().subscribe((isauthenticated)=>
     {
-      
+
       if(isauthenticated || this.userauth.isAuthenticated())
       {
-        
+
       }
       else
       {
@@ -83,17 +84,17 @@ export class AppMainComponent implements OnDestroy, AfterContentInit {
     this.userdata = event
     this.disablenavigation = false;
     this.UpdateLinks()
-  } 
+  }
 
   PageChanged()
   {
     this.disablenavigation = true;
   }
-  
+
   async GetUserData(http:HttpClient)
   {
     const message = {requesttype: "user data", user:this.userauth.email}
-    this.http.post<any>("http://" + this.commservice.ipaddressorhostname + ":3004/api/posts",message).subscribe((res) => 
+    this.http.post<any>("http://" + this.commservice.ipaddressorhostname + ":3004/api/posts",message).subscribe((res) =>
     {
       this.userdata = res.userdata
 
@@ -124,7 +125,7 @@ export class AppMainComponent implements OnDestroy, AfterContentInit {
       }
       if(this.userdata.superuser)
       {
-        
+
         this.links.push({pagename:"SVG Drawing", navpage:"svgdrawing"})
       }
       this.links.push({pagename:"Settings", navpage:"usersettings"})
@@ -159,14 +160,14 @@ export class AppMainComponent implements OnDestroy, AfterContentInit {
   async GetPageVariables(http:HttpClient)
   {
     const message = {requesttype: "variable information", user:this.userauth.email}
-    http.post<any>("http://" + this.commservice.ipaddressorhostname + ":3004/api/posts",message).subscribe((res) => 
+    http.post<any>("http://" + this.commservice.ipaddressorhostname + ":3004/api/posts",message).subscribe((res) =>
     {
       this.variableData = res
       if(this.variableData != null && this.sitestructure != null)
         this.SetSiteStructureVariables(this.sitestructure,this.variableData)
 
     })
-    
+
     this.timer = setTimeout(() => {this.GetPageVariables(http)},60000)
   }
 
@@ -207,7 +208,7 @@ export class AppMainComponent implements OnDestroy, AfterContentInit {
           }
         }
 
-        
+
       }
       else if(sitestructure.componentType == "marshal" || sitestructure.componentType == "stringlist")
       {
@@ -230,7 +231,7 @@ export class AppMainComponent implements OnDestroy, AfterContentInit {
 
   TakeMeHome()
   {
-    
+
     this.pageheirarchy = this.heirarchyservice.GetStructure(this.userdata.pages)
     this.changepage({pagename:"Main Page",navpage:"mainpage"});
   }

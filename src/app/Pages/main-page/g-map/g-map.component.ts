@@ -1,3 +1,4 @@
+
 import { AfterContentInit, Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
@@ -27,4 +28,5 @@ export class GMapComponent implements AfterContentInit, OnChanges {
       console.log(this.userdata.pages)
   }
  
+
 }
