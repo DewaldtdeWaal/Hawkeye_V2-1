@@ -55,6 +55,7 @@ import { MarshalComponent } from './Pages/dynamic-site-page/Sub Components/marsh
 import { MarshalCreationComponent } from './Creation Components/marshal-creation/marshal-creation.component';
 import { StringlistComponent } from './Pages/dynamic-site-page/Sub Components/stringlist/stringlist.component';
 import { StringlistCreationComponent } from './Creation Components/stringlist-creation/stringlist-creation.component';
+import { GMapComponent } from './Pages/main-page/g-map/g-map.component';
 
 @NgModule({
   declarations: [
@@ -100,7 +101,8 @@ import { StringlistCreationComponent } from './Creation Components/stringlist-cr
     MarshalComponent,
     MarshalCreationComponent,
     StringlistComponent,
-    StringlistCreationComponent
+    StringlistCreationComponent,
+    GMapComponent
     
 
   ],

@@ -5,6 +5,12 @@
                 width="975px"
                 [center]="center"
                 [zoom]="zoom">
+
+                <map-marker
+                *ngFor="let marker of markers"
+                [position]="marker.position"
+                [title]="marker.title">
+              </map-marker>
     </google-map>
     <p>g-map works!</p>
 
