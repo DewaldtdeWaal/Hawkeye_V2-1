@@ -25,6 +25,14 @@ export class GMapComponent implements AfterContentInit, OnChanges {
   markers: google.maps.MarkerOptions[] = [];
   infoWindow = new google.maps.InfoWindow();
 
+  highLat = -34
+  lowLat = -33
+  highLong = 24
+  lowLong = 26
+
+  bounds = new google.maps.LatLngBounds();
+  
+
   ngAfterContentInit(): void {
   }
 
@@ -44,16 +52,35 @@ export class GMapComponent implements AfterContentInit, OnChanges {
         let longitude = pagesWithGis[i].gis.longitude;
         let latitude = pagesWithGis[i].gis.latitude;
 
+        if(latitude > this.highLat)
+        {
+          this.highLat = latitude;
+        }
+        if(latitude < this.lowLat)
+        {
+          this.lowLat = latitude;
+        }
+        if(longitude > this.highLong)
+        {
+          this.highLong = longitude;
+        }
+        if(longitude < this.lowLong)
+        {
+          this.lowLong = longitude;
+        }
+
+        console.log(this.highLat, this.lowLat, this.highLong, this.lowLong)
+
         this.addMarker
         ({
           position: {lat: latitude, lng: longitude}, 
-          title: pageName
+          title: pageName,
         });
 
         this.infoWinOps
         ({
           position: {lat: latitude, lng: longitude},
-          content: pageName,
+          content: pageName,        
         })
 
         }
@@ -62,24 +89,27 @@ export class GMapComponent implements AfterContentInit, OnChanges {
 
       addMarker(marker: google.maps.MarkerOptions)
       {
-        console.log(marker, "marker")
-        this.markers.push(marker);       
+        console.log(marker, "marker"),
+        this.markers.push(marker);   
+        this.bounds.extend(marker.position),
+
+        this.bounds.extend(new google.maps.LatLng(this.highLat, this.highLong));
+        this.bounds.extend(new google.maps.LatLng(this.lowLat, this.lowLong));
       }
 
       infoWinOps(infoWindow: google.maps.InfoWindowOptions)
       {
         this.infoWindow = new google.maps.InfoWindow;
         console.log(infoWindow, "infoWindow")
-        this.addInfoWindow(this.infoWindow);
+        this.addInfoWindow();
       }
 
-      addInfoWindow(infoWindow: google.maps.InfoWindow) 
+      addInfoWindow() 
       {
-        this.infoWindow = infoWindow;
         this.infoWindow.open(this.map);
+        console.log(this.infoWindow, "infoWindow2");
       }
     
 
   }
- 
  

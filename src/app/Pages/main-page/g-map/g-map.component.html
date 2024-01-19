@@ -1,6 +1,8 @@
 
 <p> </p>
 
+<div class = "google-map"> 
+
     <google-map height="400px"
                 width="975px"
                 [center]="center"
@@ -11,16 +13,18 @@
                 *ngFor="let marker of markers"
                 [position]="marker.position"
                 [title]="marker.title">
+
+                  <map-info-window
+                  *ngFor="let marker of markers"
+                  [position]="marker.position"
+                  >
+                </map-info-window>
+                <div onclick = "addInfoWindow()"></div>
               </map-marker>
     </google-map>
-    <p>g-map works!</p>
 
-    <div
-     *ngIf="userdata!=undefined" class="myrow">
-        <div
-        *ngFor = "let pages of userdata.pages; let i = index" class="mycol">
-        {{pages}}
-        </div>
-    </div>
+  </div>
+
+
 
 
